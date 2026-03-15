@@ -39,7 +39,7 @@ export function Layout({
       <div className="flex-1 min-w-0 flex flex-col bg-card/60 lg:bg-card/50 pt-12 lg:pt-0">
 
         {/* ── Top bar — WinUI 3 command bar ── */}
-        <div className="flex-shrink-0 h-12 border-b border-border bg-card/80 flex items-center gap-3 px-4 sticky top-0 z-30 backdrop-blur-sm">
+        <div className="flex-shrink-0 h-12 border-b border-border bg-card/80 flex items-center gap-3 px-4 sticky top-12 lg:top-0 z-30 backdrop-blur-sm">
           <SearchBar
             courseOutcomes={courseOutcomes}
             onNavigate={onNavigate}
