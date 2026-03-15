@@ -23,13 +23,14 @@ export const module3: CourseOutcome = {
 
 \`\`\`c
 int add(int, int);           // 1. DECLARE
-int main() {
+void main() {
+    clrscr();
     int s = add(4, 6);       // 2. CALL
     printf("Sum = %d\n", s);
-    return 0;
 }
 int add(int a, int b) {      // 3. DEFINE
     return a + b;
+    getch();
 }
 \`\`\`
 
@@ -46,18 +47,20 @@ int add(int a, int b) {      // 3. DEFINE
           type: "code",
           language: "c",
           title: "Example",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 int add(int, int);      // declaration
 
-int main() {
+void main() {
+    clrscr();
     int s = add(4, 6);  // calling
     printf("Sum = %d\n", s);
-    return 0;
 }
 
 int add(int a, int b) { // definition
     return a + b;
+    getch();
 }`,
         },
       ],
@@ -131,7 +134,8 @@ long long factorial(int n) {
           type: "code",
           language: "c",
           title: "Factorial using function",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 long long factorial(int n) {
     long long fact = 1;
@@ -141,7 +145,8 @@ long long factorial(int n) {
     return fact;
 }
 
-int main() {
+void main() {
+    clrscr();
     int n;
     printf("Enter n: ");
     scanf("%d", &n);
@@ -151,7 +156,7 @@ int main() {
     else
         printf("%d! = %lld\n", n, factorial(n));
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -185,7 +190,8 @@ void printFibonacci(int n) {
           type: "code",
           language: "c",
           title: "Fibonacci 10 terms using function",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 void printFibonacci(int n) {
     int a = 0, b = 1, c, i;
@@ -197,9 +203,10 @@ void printFibonacci(int n) {
     }
 }
 
-int main() {
+void main() {
+    clrscr();
     printFibonacci(10);
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -229,18 +236,20 @@ int square(int n) {
           type: "code",
           language: "c",
           title: "Square using function",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 int square(int n) {
     return n * n;
 }
 
-int main() {
+void main() {
+    clrscr();
     int x;
     printf("Enter number: ");
     scanf("%d", &x);
     printf("Square = %d\n", square(x));
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -276,13 +285,15 @@ else
           type: "code",
           language: "c",
           title: "Even/Odd using function",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 int isEven(int n) {
     return (n % 2 == 0);
 }
 
-int main() {
+void main() {
+    clrscr();
     int n;
     printf("Enter number: ");
     scanf("%d", &n);
@@ -292,7 +303,7 @@ int main() {
     else
         printf("Odd\n");
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -331,7 +342,8 @@ int isPrime(int n) {
           type: "code",
           language: "c",
           title: "Prime check using function",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 int isPrime(int n) {
     int i;
@@ -342,7 +354,8 @@ int isPrime(int n) {
     return 1;
 }
 
-int main() {
+void main() {
+    clrscr();
     int n;
     printf("Enter number: ");
     scanf("%d", &n);
@@ -352,7 +365,7 @@ int main() {
     else
         printf("Not prime\n");
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -388,7 +401,8 @@ return (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c);
           type: "code",
           language: "c",
           title: "Largest of three using function",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 int largestOfThree(int a, int b, int c) {
     int max = a;
@@ -397,13 +411,14 @@ int largestOfThree(int a, int b, int c) {
     return max;
 }
 
-int main() {
+void main() {
+    clrscr();
     int a, b, c;
     printf("Enter three numbers: ");
     scanf("%d %d %d", &a, &b, &c);
 
     printf("Largest = %d\n", largestOfThree(a, b, c));
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -445,7 +460,8 @@ int reverseNumber(int n) {
           type: "code",
           language: "c",
           title: "Reverse number using function",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 int reverseNumber(int n) {
     int rev = 0;
@@ -456,13 +472,14 @@ int reverseNumber(int n) {
     return rev;
 }
 
-int main() {
+void main() {
+    clrscr();
     int n;
     printf("Enter number: ");
     scanf("%d", &n);
 
     printf("Reversed number = %d\n", reverseNumber(n));
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -506,19 +523,21 @@ int sumNatural(int n) {
           type: "code",
           language: "c",
           title: "Sum of first n natural numbers",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 int sumNatural(int n) {
     return n * (n + 1) / 2;
 }
 
-int main() {
+void main() {
+    clrscr();
     int n;
     printf("Enter n: ");
     scanf("%d", &n);
 
     printf("Sum = %d\n", sumNatural(n));
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -558,10 +577,12 @@ fgets(str, sizeof(str), stdin);  // reads entire line safely
           type: "code",
           language: "c",
           title: "Count digits, alphabets, and special characters",
-          content: `#include <stdio.h>
-#include <ctype.h>
+          content: `#include<stdio.h>
+#include<conio.h>
+#include<ctype.h>
 
-int main() {
+void main() {
+    clrscr();
     char str[200];
     int i = 0, alphabets = 0, digits = 0, special = 0;
 
@@ -579,7 +600,7 @@ int main() {
     printf("Digits = %d\n", digits);
     printf("Special Characters = %d\n", special);
 
-    return 0;
+    getch();
 }`,
         },
       ],

@@ -7,7 +7,7 @@ export const sirNotes: Record<string, string> = {
 
   "sir-q1": `**What it does:** Reads three integers a, b, c and prints their sum.
 **Key concept:** \`scanf("%d%d%d", &a, &b, &c)\` reads three ints in one call; any whitespace (space/newline/tab) acts as separator.
-**Exam tip:** Always match format specifiers — use \`%d\` for int, \`%f\` for float. \`void main()\` is non-standard; prefer \`int main()\` in exams but sir uses void throughout.`,
+**Exam tip:** Always match format specifiers — use \`%d\` for int, \`%f\` for float. \`void main()\` is non-standard; prefer \`void main()\` in exams but sir uses void throughout.`,
 
   "sir-q2": `**What it does:** Checks even or odd using the ternary conditional operator directly inside \`printf\`.
 **Key concept:** Ternary operator: \`condition ? value_if_true : value_if_false\`. Here neither branch is stored — the result is passed straight to \`printf\`.

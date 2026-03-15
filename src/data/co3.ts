@@ -45,21 +45,23 @@ In C, when we work with functions, we deal with two kinds of parameters:
           type: "code",
           language: "c",
           title: "Example: Actual vs Formal Parameters",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // 'a' and 'b' are FORMAL parameters
 int add(int a, int b) {
     return a + b;
 }
 
-int main() {
+void main() {
+    clrscr();
     int x = 10, y = 20;
 
     // 'x' and 'y' are ACTUAL parameters (arguments)
     int result = add(x, y);
 
     printf("Sum = %d\\n", result);  // Output: Sum = 30
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -75,7 +77,8 @@ int main() {
           type: "code",
           language: "c",
           title: "Sum of Digits Using a Function",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Function to calculate the sum of digits of a number
 int sumOfDigits(int num) {
@@ -93,7 +96,8 @@ int sumOfDigits(int num) {
     return sum;
 }
 
-int main() {
+void main() {
+    clrscr();
     int number, result;
 
     printf("Enter a number: ");
@@ -103,7 +107,7 @@ int main() {
 
     printf("Sum of digits of %d = %d\\n", number, result);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -147,7 +151,8 @@ Each call to \`fibonacci(n)\` makes two recursive calls until it reaches the bas
           type: "code",
           language: "c",
           title: "Fibonacci Series Using Recursion",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Recursive function to compute the nth Fibonacci number
 int fibonacci(int n) {
@@ -161,7 +166,8 @@ int fibonacci(int n) {
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-int main() {
+void main() {
+    clrscr();
     int n, i;
 
     printf("Enter the number of terms: ");
@@ -173,7 +179,7 @@ int main() {
     }
     printf("\\n");
 
-    return 0;
+    getch();
 }
 
 /*
@@ -259,17 +265,18 @@ Fibonacci Series: 0 1 1 2 3 5 8 13 21 34
           type: "code",
           language: "c",
           title: "Example: Declaration vs Definition",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // FUNCTION DECLARATION (Prototype)
 // - No body, ends with semicolon
 // - Parameter names are optional
 int add(int, int);
 
-int main() {
+void main() {
+    clrscr();
     int result = add(5, 3);  // Function CALL
     printf("Sum = %d\\n", result);
-    return 0;
 }
 
 // FUNCTION DEFINITION
@@ -277,6 +284,7 @@ int main() {
 // - Parameter names are required
 int add(int a, int b) {
     return a + b;
+    getch();
 }
 
 /*
@@ -329,7 +337,8 @@ C provides **four** storage classes:
           type: "code",
           language: "c",
           title: "Example: Storage Classes in Action",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 int globalVar = 100;  // extern by default (global variable)
 
@@ -351,7 +360,8 @@ void demonstrateRegister() {
     }
 }
 
-int main() {
+void main() {
+    clrscr();
     printf("Global variable = %d\\n\\n", globalVar);
 
     printf("--- Auto ---\\n");
@@ -365,7 +375,7 @@ int main() {
     printf("\\n--- Register ---\\n");
     demonstrateRegister();
 
-    return 0;
+    getch();
 }
 
 /*
@@ -415,7 +425,8 @@ The **factorial** of a non-negative integer \`n\` is the product of all positive
           type: "code",
           language: "c",
           title: "Factorial Using Recursion",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Recursive function to calculate factorial
 long long factorial(int n) {
@@ -427,7 +438,8 @@ long long factorial(int n) {
     return n * factorial(n - 1);
 }
 
-int main() {
+void main() {
+    clrscr();
     int num;
 
     printf("Enter a positive integer: ");
@@ -439,7 +451,7 @@ int main() {
         printf("Factorial of %d = %lld\\n", num, factorial(num));
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -499,7 +511,8 @@ Trace for factorial(5):
           type: "code",
           language: "c",
           title: "nCr Combination Using Factorial Function",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Function to calculate factorial
 long long factorial(int n) {
@@ -522,7 +535,8 @@ long long nCr(int n, int r) {
     return factorial(n) / (factorial(n - r) * factorial(r));
 }
 
-int main() {
+void main() {
+    clrscr();
     int n, r;
 
     printf("Enter the value of n: ");
@@ -538,7 +552,7 @@ int main() {
         printf("%dC%d = %lld\\n", n, r, nCr(n, r));
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -588,7 +602,8 @@ Unwinding: \`1 -> 2 -> 4 -> 8 -> 16\``,
           type: "code",
           language: "c",
           title: "Power Function Using Recursion",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Recursive function to calculate x^n
 double power(double x, int n) {
@@ -604,7 +619,8 @@ double power(double x, int n) {
     return x * power(x, n - 1);
 }
 
-int main() {
+void main() {
+    clrscr();
     double x, result;
     int n;
 
@@ -617,7 +633,7 @@ int main() {
 
     printf("%.2lf ^ %d = %.2lf\\n", x, n, result);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -701,7 +717,8 @@ C provides **four** storage classes that determine the scope, lifetime, visibili
           type: "code",
           language: "c",
           title: "Call by Value Example",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Call by Value: formal parameter is a copy
 void swapByValue(int a, int b) {
@@ -711,7 +728,8 @@ void swapByValue(int a, int b) {
     printf("Inside function: a = %d, b = %d\\n", a, b);
 }
 
-int main() {
+void main() {
+    clrscr();
     int x = 10, y = 20;
 
     printf("Before swap: x = %d, y = %d\\n", x, y);
@@ -719,7 +737,7 @@ int main() {
     printf("After swap:  x = %d, y = %d\\n", x, y);
     // Values remain UNCHANGED!
 
-    return 0;
+    getch();
 }
 
 /*
@@ -734,7 +752,8 @@ After swap:  x = 10, y = 20
           type: "code",
           language: "c",
           title: "Call by Reference Example",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Call by Reference: formal parameter is a pointer
 void swapByReference(int *a, int *b) {
@@ -744,7 +763,8 @@ void swapByReference(int *a, int *b) {
     printf("Inside function: *a = %d, *b = %d\\n", *a, *b);
 }
 
-int main() {
+void main() {
+    clrscr();
     int x = 10, y = 20;
 
     printf("Before swap: x = %d, y = %d\\n", x, y);
@@ -752,7 +772,7 @@ int main() {
     printf("After swap:  x = %d, y = %d\\n", x, y);
     // Values are CHANGED!
 
-    return 0;
+    getch();
 }
 
 /*
@@ -775,7 +795,8 @@ After swap:  x = 20, y = 10
           type: "code",
           language: "c",
           title: "Factorial Using Recursion",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Recursive function to find factorial
 long long factorial(int n) {
@@ -784,7 +805,8 @@ long long factorial(int n) {
     return n * factorial(n - 1);  // Recursive case
 }
 
-int main() {
+void main() {
+    clrscr();
     int num;
 
     printf("Enter a number: ");
@@ -796,7 +818,7 @@ int main() {
         printf("Factorial of %d = %lld\\n", num, factorial(num));
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -843,7 +865,8 @@ Trace:
           type: "code",
           language: "c",
           title: "Call by Value Example",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Function receives COPIES of the arguments
 void modify(int num) {
@@ -851,7 +874,8 @@ void modify(int num) {
     printf("Inside function: num = %d\\n", num);
 }
 
-int main() {
+void main() {
+    clrscr();
     int value = 50;
 
     printf("Before function call: value = %d\\n", value);
@@ -859,7 +883,7 @@ int main() {
     printf("After function call:  value = %d\\n", value);
     // 'value' remains unchanged!
 
-    return 0;
+    getch();
 }
 
 /*
@@ -905,7 +929,8 @@ Functions in C can be categorized based on whether they accept arguments and ret
           type: "code",
           language: "c",
           title: "Type 1: Without Arguments, Without Return Value",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // No arguments, no return value
 void greet(void) {
@@ -917,12 +942,13 @@ void printLine(void) {
     printf("================================\\n");
 }
 
-int main() {
+void main() {
+    clrscr();
     printLine();
     greet();      // No arguments passed, no return value received
     printLine();
 
-    return 0;
+    getch();
 }
 
 /*
@@ -937,7 +963,8 @@ This function takes no input and returns nothing.
           type: "code",
           language: "c",
           title: "Type 2: Without Arguments, With Return Value",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // No arguments, but returns a value
 int getNumber(void) {
@@ -951,7 +978,8 @@ float getPI(void) {
     return 3.14159f;  // Returns a constant value
 }
 
-int main() {
+void main() {
+    clrscr();
     int number;
     float pi;
 
@@ -961,7 +989,7 @@ int main() {
     pi = getPI();          // No arguments, receives PI value
     printf("Value of PI: %.5f\\n", pi);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -998,7 +1026,8 @@ In **call by reference**, we pass the **addresses** of variables to the function
           type: "code",
           language: "c",
           title: "Swap Using Call by Reference",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Function to swap two integers using pointers (call by reference)
 void swap(int *a, int *b) {
@@ -1008,7 +1037,8 @@ void swap(int *a, int *b) {
     *b = temp;    // Copy temp to address 'b'
 }
 
-int main() {
+void main() {
+    clrscr();
     int x = 25, y = 50;
 
     printf("Before swapping:\\n");
@@ -1020,7 +1050,7 @@ int main() {
     printf("After swapping:\\n");
     printf("x = %d, y = %d\\n", x, y);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1057,7 +1087,8 @@ Memory Visualization:
           type: "code",
           language: "c",
           title: "Print Factorial Using Recursion",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Recursive function to compute factorial
 long long factorial(int n) {
@@ -1066,7 +1097,8 @@ long long factorial(int n) {
     return n * factorial(n - 1);  // n! = n * (n-1)!
 }
 
-int main() {
+void main() {
+    clrscr();
     int num;
 
     printf("Enter a positive integer: ");
@@ -1078,7 +1110,7 @@ int main() {
         printf("%d! = %lld\\n", num, factorial(num));
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1207,7 +1239,8 @@ While recursion provides elegant and readable solutions, **iteration is often pr
           type: "code",
           language: "c",
           title: "Example: auto Storage Class",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 void autoExample() {
     auto int x = 10;  // 'auto' keyword is optional
@@ -1216,10 +1249,11 @@ void autoExample() {
 }
 // x and y are destroyed when the function exits
 
-int main() {
+void main() {
+    clrscr();
     autoExample();
     autoExample();  // x and y are re-created each time
-    return 0;
+    getch();
 }
 
 /*
@@ -1232,9 +1266,11 @@ auto: x = 10, y = 20
           type: "code",
           language: "c",
           title: "Example: register Storage Class",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     register int i;  // Hint to store 'i' in CPU register
     int sum = 0;
 
@@ -1247,7 +1283,7 @@ int main() {
     // NOTE: &i would cause a compilation error
     // printf("%p", &i);  // ERROR: cannot take address of register variable
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1259,7 +1295,8 @@ Sum of 1 to 100 = 5050
           type: "code",
           language: "c",
           title: "Example: static Storage Class",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 void counter() {
     static int count = 0;  // Initialized only ONCE
@@ -1267,13 +1304,14 @@ void counter() {
     printf("Function called %d time(s)\\n", count);
 }
 
-int main() {
+void main() {
+    clrscr();
     counter();  // count = 1
     counter();  // count = 2 (value retained from previous call)
     counter();  // count = 3
     counter();  // count = 4
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1292,7 +1330,8 @@ because it would be re-initialized on each call.
           language: "c",
           title: "Example: extern Storage Class",
           content: `// --- file1.c ---
-#include <stdio.h>
+#include<stdio.h>
+#include<conio.h>
 
 int sharedVar = 100;  // Global variable (defined here)
 
@@ -1301,7 +1340,7 @@ void printShared() {
 }
 
 // --- file2.c ---
-#include <stdio.h>
+#include<stdio.h>
 
 extern int sharedVar;  // Declaration: variable is defined in file1.c
 
@@ -1311,18 +1350,19 @@ void modifyShared() {
 }
 
 // --- main.c ---
-#include <stdio.h>
+#include<stdio.h>
 
 extern int sharedVar;  // Access the same global variable
 void printShared();     // Function from file1.c
 void modifyShared();    // Function from file2.c
 
-int main() {
+void main() {
+    clrscr();
     printf("Initial sharedVar = %d\\n", sharedVar);  // 100
     printShared();     // 100
     modifyShared();    // Changes to 200
     printShared();     // 200
-    return 0;
+    getch();
 }
 
 /*
@@ -1382,7 +1422,8 @@ sharedVar in file1 = 200
           type: "code",
           language: "c",
           title: "Quick Sort Implementation",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Function to swap two elements
 void swap(int *a, int *b) {
@@ -1429,7 +1470,8 @@ void printArray(int arr[], int size) {
     printf("\\n");
 }
 
-int main() {
+void main() {
+    clrscr();
     int arr[] = {10, 7, 8, 9, 1, 5};
     int n = sizeof(arr) / sizeof(arr[0]);
 
@@ -1441,7 +1483,7 @@ int main() {
     printf("Sorted array:   ");
     printArray(arr, n);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1525,7 +1567,8 @@ A function in C has three key aspects:
           type: "code",
           language: "c",
           title: "Area of Circle: Declaration, Calling, and Definition",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // ========================================
 // 1. FUNCTION DECLARATION (Prototype)
@@ -1535,7 +1578,8 @@ A function in C has three key aspects:
 // ========================================
 float areaOfCircle(float radius);
 
-int main() {
+void main() {
+    clrscr();
     float r, area;
 
     printf("Enter the radius of the circle: ");
@@ -1551,7 +1595,6 @@ int main() {
 
     printf("Area of circle with radius %.2f = %.2f\\n", r, area);
 
-    return 0;
 }
 
 // ========================================
@@ -1564,6 +1607,7 @@ float areaOfCircle(float radius) {
     float result;
     result = 3.14159 * radius * radius;
     return result;
+    getch();
 }
 
 /*
@@ -1613,7 +1657,8 @@ Area of circle with radius 5.00 = 78.54
           type: "code",
           language: "c",
           title: "Sort Array Using User-Defined Function (Bubble Sort)",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Function to sort an array in ascending order using Bubble Sort
 void sortArray(int arr[], int n) {
@@ -1640,7 +1685,8 @@ void printArray(int arr[], int n) {
     printf("\\n");
 }
 
-int main() {
+void main() {
+    clrscr();
     int arr[100], n, i;
 
     printf("Enter number of elements: ");
@@ -1659,7 +1705,7 @@ int main() {
     printf("Sorted array:   ");
     printArray(arr, n);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1688,7 +1734,8 @@ original array in main().
           type: "code",
           language: "c",
           title: "Calculate Factorial Using Recursion",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // Recursive factorial function
 long long factorial(int n) {
@@ -1699,7 +1746,8 @@ long long factorial(int n) {
     return n * factorial(n - 1);
 }
 
-int main() {
+void main() {
+    clrscr();
     int num;
 
     printf("Enter a number to find its factorial: ");
@@ -1711,7 +1759,7 @@ int main() {
         printf("Factorial of %d = %lld\\n", num, factorial(num));
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1815,7 +1863,8 @@ extern int globalVar;
           type: "code",
           language: "c",
           title: "Complete Example: All Storage Classes",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
 // EXTERN: Global variable (visible across files)
 int globalCount = 0;
@@ -1852,7 +1901,8 @@ void demoExtern() {
     printf("[extern]   globalCount = %d\\n", globalCount);
 }
 
-int main() {
+void main() {
+    clrscr();
     printf("=== AUTO ===\\n");
     demoAuto();   // a = 5
     demoAuto();   // a = 5 (re-created, previous change lost)
@@ -1871,7 +1921,7 @@ int main() {
     demoExtern(); // globalCount = 10
     demoExtern(); // globalCount = 20
 
-    return 0;
+    getch();
 }
 
 /*

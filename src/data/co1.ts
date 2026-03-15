@@ -72,9 +72,11 @@ export const co1: CourseOutcome = {
           type: "code",
           language: "c",
           title: "Program – Numbers and their Cubes",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i;
 
     printf("Number\\tCube\\n");
@@ -84,7 +86,7 @@ int main() {
         printf("%d\\t%d\\n", i, i * i * i);
     }
 
-    return 0;
+    getch();
 }`,
         },
         {
@@ -113,10 +115,12 @@ int main() {
           type: "code",
           language: "c",
           title: "Example – Using a Standard Header File",
-          content: `#include <stdio.h>   /* standard I/O header */
-#include <math.h>    /* math header for sqrt() */
+          content: `#include<stdio.h>
+#include<conio.h>   /* standard I/O header */
+#include<math.h>    /* math header for sqrt() */
 
-int main() {
+void main() {
+    clrscr();
     double num = 25.0;
     double result;
 
@@ -124,7 +128,7 @@ int main() {
 
     printf("Square root of %.1f = %.1f\\n", num, result);
 
-    return 0;
+    getch();
 }
 /* Output: Square root of 25.0 = 5.0 */`,
         },
@@ -153,13 +157,15 @@ int multiply(int a, int b) {
 }
 
 /* ----- main.c ----- */
-#include <stdio.h>
+#include<stdio.h>
+#include<conio.h>
 #include "mymath.h"
 
-int main() {
+void main() {
+    clrscr();
     printf("Sum = %d\\n", add(3, 4));
     printf("Product = %d\\n", multiply(3, 4));
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -293,9 +299,11 @@ int main() {
           type: "code",
           language: "c",
           title: "Program Demonstrating All Bitwise Operators",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int a = 5, b = 3;
 
     printf("a = %d (binary: 0101)\\n", a);
@@ -308,7 +316,7 @@ int main() {
     printf("a << 1 = %d\\n", a << 1);  /* Left shift:  10 */
     printf("a >> 1 = %d\\n", a >> 1);  /* Right shift: 2  */
 
-    return 0;
+    getch();
 }
 
 /*
@@ -346,9 +354,11 @@ a >> 1 = 2
           type: "code",
           language: "c",
           title: "Program -- Largest of Three Numbers using Ternary Operator",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int a, b, c, largest;
 
     printf("Enter three numbers: ");
@@ -360,7 +370,7 @@ int main() {
 
     printf("The largest number is: %d\\n", largest);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -425,7 +435,7 @@ The largest number is: 45
         {
           type: "text",
           content:
-            "## Tokens in C\n\nA **token** is the smallest individual unit (building block) in a C program that is meaningful to the compiler. During compilation, the source code is broken down into tokens by the **lexical analyzer**.\n\n---\n\n### Types of Tokens in C\n\nC has **six** types of tokens:\n\n### 1. Keywords\n- Pre-defined reserved words with special meaning.\n- Cannot be used as identifiers (variable/function names).\n- C has **32 keywords** (in ANSI C).\n- Examples: `int`, `float`, `char`, `if`, `else`, `while`, `for`, `return`, `void`, `struct`, `switch`, `break`, `continue`, `typedef`, `sizeof`, `do`, `static`, `extern`, `const`, `volatile`, etc.\n\n### 2. Identifiers\n- Names given to variables, functions, arrays, structures, etc.\n- **Rules for identifiers:**\n  - Must begin with a letter (a-z, A-Z) or underscore (`_`).\n  - Can contain letters, digits (0-9), and underscores.\n  - Cannot be a keyword.\n  - Case-sensitive (`sum` and `Sum` are different).\n- Examples: `total`, `_count`, `student_name`, `MAX_SIZE`\n\n### 3. Constants (Literals)\n- Fixed values that do not change during program execution.\n- Types:\n  - **Integer constants:** `10`, `-25`, `0x1A` (hex), `077` (octal)\n  - **Floating-point constants:** `3.14`, `2.5e3`\n  - **Character constants:** `'A'`, `'\\n'`, `'\\0'`\n  - **String constants:** `\"Hello World\"`\n\n### 4. Strings (String Literals)\n- A sequence of characters enclosed in double quotes.\n- Automatically terminated with a null character (`\\0`).\n- Examples: `\"Computer Programming\"`, `\"Hello\\n\"`\n\n### 5. Operators\n- Symbols that perform operations on operands.\n- Types: Arithmetic (`+`, `-`, `*`, `/`, `%`), Relational (`<`, `>`, `==`, `!=`), Logical (`&&`, `||`, `!`), Assignment (`=`, `+=`), Bitwise (`&`, `|`, `^`, `~`), etc.\n\n### 6. Special Symbols (Punctuators)\n- Characters with special meaning in C syntax.\n- Examples:\n  - `{ }` -- Block delimiters\n  - `( )` -- Function calls, grouping\n  - `[ ]` -- Array subscript\n  - `;` -- Statement terminator\n  - `,` -- Separator\n  - `#` -- Preprocessor directive\n  - `*` -- Pointer declaration\n\n---\n\n### Example: Identifying Tokens\n\n```c\nint main() {\n    int sum = 10 + 20;\n    printf(\"%d\", sum);\n    return 0;\n}\n```\n\n| Token | Type |\n|-------|------|\n| `int` | Keyword |\n| `main` | Identifier |\n| `(` `)` | Special Symbol |\n| `{` `}` | Special Symbol |\n| `sum` | Identifier |\n| `=` | Operator |\n| `10`, `20`, `0` | Integer Constant |\n| `+` | Operator |\n| `printf` | Identifier |\n| `\"%d\"` | String Literal |\n| `;` | Special Symbol |\n| `return` | Keyword |",
+            "## Tokens in C\n\nA **token** is the smallest individual unit (building block) in a C program that is meaningful to the compiler. During compilation, the source code is broken down into tokens by the **lexical analyzer**.\n\n---\n\n### Types of Tokens in C\n\nC has **six** types of tokens:\n\n### 1. Keywords\n- Pre-defined reserved words with special meaning.\n- Cannot be used as identifiers (variable/function names).\n- C has **32 keywords** (in ANSI C).\n- Examples: `int`, `float`, `char`, `if`, `else`, `while`, `for`, `return`, `void`, `struct`, `switch`, `break`, `continue`, `typedef`, `sizeof`, `do`, `static`, `extern`, `const`, `volatile`, etc.\n\n### 2. Identifiers\n- Names given to variables, functions, arrays, structures, etc.\n- **Rules for identifiers:**\n  - Must begin with a letter (a-z, A-Z) or underscore (`_`).\n  - Can contain letters, digits (0-9), and underscores.\n  - Cannot be a keyword.\n  - Case-sensitive (`sum` and `Sum` are different).\n- Examples: `total`, `_count`, `student_name`, `MAX_SIZE`\n\n### 3. Constants (Literals)\n- Fixed values that do not change during program execution.\n- Types:\n  - **Integer constants:** `10`, `-25`, `0x1A` (hex), `077` (octal)\n  - **Floating-point constants:** `3.14`, `2.5e3`\n  - **Character constants:** `'A'`, `'\\n'`, `'\\0'`\n  - **String constants:** `\"Hello World\"`\n\n### 4. Strings (String Literals)\n- A sequence of characters enclosed in double quotes.\n- Automatically terminated with a null character (`\\0`).\n- Examples: `\"Computer Programming\"`, `\"Hello\\n\"`\n\n### 5. Operators\n- Symbols that perform operations on operands.\n- Types: Arithmetic (`+`, `-`, `*`, `/`, `%`), Relational (`<`, `>`, `==`, `!=`), Logical (`&&`, `||`, `!`), Assignment (`=`, `+=`), Bitwise (`&`, `|`, `^`, `~`), etc.\n\n### 6. Special Symbols (Punctuators)\n- Characters with special meaning in C syntax.\n- Examples:\n  - `{ }` -- Block delimiters\n  - `( )` -- Function calls, grouping\n  - `[ ]` -- Array subscript\n  - `;` -- Statement terminator\n  - `,` -- Separator\n  - `#` -- Preprocessor directive\n  - `*` -- Pointer declaration\n\n---\n\n### Example: Identifying Tokens\n\n```c\nvoid main() {\n    int sum = 10 + 20;\n    printf(\"%d\", sum);\n    return 0;\n}\n```\n\n| Token | Type |\n|-------|------|\n| `int` | Keyword |\n| `main` | Identifier |\n| `(` `)` | Special Symbol |\n| `{` `}` | Special Symbol |\n| `sum` | Identifier |\n| `=` | Operator |\n| `10`, `20`, `0` | Integer Constant |\n| `+` | Operator |\n| `printf` | Identifier |\n| `\"%d\"` | String Literal |\n| `;` | Special Symbol |\n| `return` | Keyword |",
         },
       ],
     },
@@ -484,7 +494,7 @@ The largest number is: 45
         {
           type: "text",
           content:
-            "## Types of Tokens in C\n\nThe six types of tokens in C are:\n\n1. **Keywords** -- Reserved words with predefined meaning (e.g., `int`, `return`, `if`)\n2. **Identifiers** -- User-defined names for variables, functions, etc.\n3. **Constants** -- Fixed values (integer, float, character literals)\n4. **String Literals** -- Sequences of characters in double quotes\n5. **Operators** -- Symbols for operations (`+`, `-`, `*`, `=`, `&&`, etc.)\n6. **Special Symbols / Punctuators** -- Syntax characters (`{`, `}`, `;`, `(`, `)`, etc.)\n\n---\n\n### Detailed Explanation: Keywords\n\n**Keywords** (also called **reserved words**) are predefined words in C that have a special, fixed meaning to the compiler. They form the vocabulary of the C language and **cannot be used as identifiers** (variable names, function names, etc.).\n\n**Properties of Keywords:**\n- All keywords are in **lowercase**.\n- They are **reserved** -- you cannot redefine them.\n- C (ANSI C89) defines **32 keywords**.\n\n**List of all 32 Keywords in ANSI C:**\n\n| | | | | |\n|---|---|---|---|---|\n| `auto` | `break` | `case` | `char` | `const` |\n| `continue` | `default` | `do` | `double` | `else` |\n| `enum` | `extern` | `float` | `for` | `goto` |\n| `if` | `int` | `long` | `register` | `return` |\n| `short` | `signed` | `sizeof` | `static` | `struct` |\n| `switch` | `typedef` | `union` | `unsigned` | `void` |\n| `volatile` | `while` | | | |\n\n**Example:**\n\n```c\nint main() {       /* 'int', 'return' are keywords */\n    float avg;      /* 'float' is a keyword         */\n    if (avg > 50)   /* 'if' is a keyword             */\n        return 1;   /* 'return' is a keyword         */\n    return 0;\n}\n```\n\n**Note:** Using a keyword as a variable name (e.g., `int float = 5;`) will produce a **compilation error**.",
+            "## Types of Tokens in C\n\nThe six types of tokens in C are:\n\n1. **Keywords** -- Reserved words with predefined meaning (e.g., `int`, `return`, `if`)\n2. **Identifiers** -- User-defined names for variables, functions, etc.\n3. **Constants** -- Fixed values (integer, float, character literals)\n4. **String Literals** -- Sequences of characters in double quotes\n5. **Operators** -- Symbols for operations (`+`, `-`, `*`, `=`, `&&`, etc.)\n6. **Special Symbols / Punctuators** -- Syntax characters (`{`, `}`, `;`, `(`, `)`, etc.)\n\n---\n\n### Detailed Explanation: Keywords\n\n**Keywords** (also called **reserved words**) are predefined words in C that have a special, fixed meaning to the compiler. They form the vocabulary of the C language and **cannot be used as identifiers** (variable names, function names, etc.).\n\n**Properties of Keywords:**\n- All keywords are in **lowercase**.\n- They are **reserved** -- you cannot redefine them.\n- C (ANSI C89) defines **32 keywords**.\n\n**List of all 32 Keywords in ANSI C:**\n\n| | | | | |\n|---|---|---|---|---|\n| `auto` | `break` | `case` | `char` | `const` |\n| `continue` | `default` | `do` | `double` | `else` |\n| `enum` | `extern` | `float` | `for` | `goto` |\n| `if` | `int` | `long` | `register` | `return` |\n| `short` | `signed` | `sizeof` | `static` | `struct` |\n| `switch` | `typedef` | `union` | `unsigned` | `void` |\n| `volatile` | `while` | | | |\n\n**Example:**\n\n```c\nvoid main() {       /* 'int', 'return' are keywords */\n    float avg;      /* 'float' is a keyword         */\n    if (avg > 50)   /* 'if' is a keyword             */\n        return 1;   /* 'return' is a keyword         */\n    return 0;\n}\n```\n\n**Note:** Using a keyword as a variable name (e.g., `int float = 5;`) will produce a **compilation error**.",
         },
       ],
     },
@@ -575,9 +585,11 @@ The largest number is: 45
           type: "code",
           language: "c",
           title: "Example Program -- Logical and Assignment Operators",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int a = 10, b = 20, c = 0;
 
     /* --- Logical Operators --- */
@@ -619,7 +631,7 @@ int main() {
     x %= 7;    /* x = 60 % 7 = 4 */
     printf("After x %%= 7  : x = %d\\n", x);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -653,7 +665,7 @@ After x %= 7  : x = 4
         {
           type: "text",
           content:
-            "## Variables in C\n\n### Definition\nA **variable** is a named memory location that can store a data value which **may change** during program execution.\n\n### Syntax\n```c\ndata_type variable_name = initial_value;\n```\n**Example:** `int age = 25;`\n\n### Rules for Naming Variables\n- Must begin with a letter or underscore (`_`).\n- Can contain letters, digits, and underscores.\n- Cannot be a C keyword.\n- Case-sensitive (`Sum` and `sum` are different variables).\n\n### Types of Variables in C\n\n| Type | Keyword | Scope | Lifetime | Description |\n|------|---------|-------|----------|-------------|\n| **Local** | (none) | Inside the block/function where declared | Until the function returns | Accessible only within the declaring function |\n| **Global** | (none -- declared outside all functions) | Entire program | Entire program execution | Accessible from any function in the file |\n| **Static** | `static` | Inside the declaring function | Entire program execution | Retains value between function calls |\n| **Automatic** | `auto` (default) | Inside the block | Until the block exits | Same as local; `auto` keyword is rarely used |\n| **External** | `extern` | Across multiple files | Entire program execution | Declared in one file and used in another |\n| **Register** | `register` | Inside the block | Until the block exits | Suggests storing in a CPU register for faster access |\n\n### Example\n```c\nint g = 100;              /* Global variable */\n\nvoid counter() {\n    static int count = 0;  /* Static variable -- retains value */\n    count++;\n    printf(\"Count = %d\\n\", count);\n}\n\nint main() {\n    int x = 10;            /* Local variable */\n    counter();             /* Count = 1 */\n    counter();             /* Count = 2 */\n    counter();             /* Count = 3 */\n    return 0;\n}\n```\n\n---\n\n## Constants in C\n\n### Definition\nA **constant** is a value that **cannot be changed** once defined during program execution.\n\n### Ways to Define Constants\n\n1. **Using `const` keyword:**\n```c\nconst float PI = 3.14159;\n```\nAttempting `PI = 3.0;` later will cause a **compilation error**.\n\n2. **Using `#define` preprocessor directive:**\n```c\n#define PI 3.14159\n#define MAX_SIZE 100\n```\nThis performs a textual replacement before compilation.\n\n### Types of Constants\n\n| Type | Example | Description |\n|------|---------|-------------|\n| **Integer constant** | `10`, `-25`, `0x1F`, `077` | Whole numbers (decimal, hex, octal) |\n| **Floating-point constant** | `3.14`, `2.5e3` | Decimal numbers |\n| **Character constant** | `'A'`, `'\\n'`, `'\\0'` | Single character in single quotes |\n| **String constant** | `\"Hello\"` | Sequence of characters in double quotes |\n| **Enumeration constant** | `enum { RED=1, GREEN, BLUE }` | Named integer values |\n\n### Difference Between Variables and Constants\n\n| Feature | Variable | Constant |\n|---------|----------|----------|\n| Value | Can change | Cannot change |\n| Declaration | `int x = 5;` | `const int x = 5;` or `#define X 5` |\n| Memory | Allocated and modifiable | Allocated but read-only (for `const`) |\n| Purpose | Store data that varies | Store fixed values (PI, limits, etc.) |",
+            "## Variables in C\n\n### Definition\nA **variable** is a named memory location that can store a data value which **may change** during program execution.\n\n### Syntax\n```c\ndata_type variable_name = initial_value;\n```\n**Example:** `int age = 25;`\n\n### Rules for Naming Variables\n- Must begin with a letter or underscore (`_`).\n- Can contain letters, digits, and underscores.\n- Cannot be a C keyword.\n- Case-sensitive (`Sum` and `sum` are different variables).\n\n### Types of Variables in C\n\n| Type | Keyword | Scope | Lifetime | Description |\n|------|---------|-------|----------|-------------|\n| **Local** | (none) | Inside the block/function where declared | Until the function returns | Accessible only within the declaring function |\n| **Global** | (none -- declared outside all functions) | Entire program | Entire program execution | Accessible from any function in the file |\n| **Static** | `static` | Inside the declaring function | Entire program execution | Retains value between function calls |\n| **Automatic** | `auto` (default) | Inside the block | Until the block exits | Same as local; `auto` keyword is rarely used |\n| **External** | `extern` | Across multiple files | Entire program execution | Declared in one file and used in another |\n| **Register** | `register` | Inside the block | Until the block exits | Suggests storing in a CPU register for faster access |\n\n### Example\n```c\nint g = 100;              /* Global variable */\n\nvoid counter() {\n    static int count = 0;  /* Static variable -- retains value */\n    count++;\n    printf(\"Count = %d\\n\", count);\n}\n\nvoid main() {\n    int x = 10;            /* Local variable */\n    counter();             /* Count = 1 */\n    counter();             /* Count = 2 */\n    counter();             /* Count = 3 */\n    return 0;\n}\n```\n\n---\n\n## Constants in C\n\n### Definition\nA **constant** is a value that **cannot be changed** once defined during program execution.\n\n### Ways to Define Constants\n\n1. **Using `const` keyword:**\n```c\nconst float PI = 3.14159;\n```\nAttempting `PI = 3.0;` later will cause a **compilation error**.\n\n2. **Using `#define` preprocessor directive:**\n```c\n#define PI 3.14159\n#define MAX_SIZE 100\n```\nThis performs a textual replacement before compilation.\n\n### Types of Constants\n\n| Type | Example | Description |\n|------|---------|-------------|\n| **Integer constant** | `10`, `-25`, `0x1F`, `077` | Whole numbers (decimal, hex, octal) |\n| **Floating-point constant** | `3.14`, `2.5e3` | Decimal numbers |\n| **Character constant** | `'A'`, `'\\n'`, `'\\0'` | Single character in single quotes |\n| **String constant** | `\"Hello\"` | Sequence of characters in double quotes |\n| **Enumeration constant** | `enum { RED=1, GREEN, BLUE }` | Named integer values |\n\n### Difference Between Variables and Constants\n\n| Feature | Variable | Constant |\n|---------|----------|----------|\n| Value | Can change | Cannot change |\n| Declaration | `int x = 5;` | `const int x = 5;` or `#define X 5` |\n| Memory | Allocated and modifiable | Allocated but read-only (for `const`) |\n| Purpose | Store data that varies | Store fixed values (PI, limits, etc.) |",
         },
       ],
     },
@@ -672,9 +684,11 @@ After x %= 7  : x = 4
           type: "code",
           language: "c",
           title: "Largest of Three Numbers -- Ternary Operator",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int a, b, c, largest;
 
     printf("Enter three numbers: ");
@@ -691,7 +705,7 @@ int main() {
 
     printf("Largest = %d\\n", largest);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -778,9 +792,11 @@ Largest = 7
           type: "code",
           language: "c",
           title: "C Program -- Grading System",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int marks;
     char grade[3];
 
@@ -808,7 +824,7 @@ int main() {
         printf("Grade: F (Fail)\\n");
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -843,9 +859,11 @@ This type of question tests your ability to trace C code execution and predict t
           type: "code",
           language: "c",
           title: "Program to Trace (May-June 2024 style)",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int a = 5, b = 3, c = 2;
     int x, y;
 
@@ -865,7 +883,7 @@ int main() {
 
     printf("p = %d, q = %d\\n", p, q);
 
-    return 0;
+    getch();
 }`,
         },
         {
@@ -919,9 +937,11 @@ This question tests deeper understanding — you must not only give the output, 
           type: "code",
           language: "c",
           title: "Program to Analyze (May-June 2025 style)",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i = 10, j = 3;
     float f = 5.0;
 
@@ -939,7 +959,7 @@ int main() {
     printf("%d\\n", i & j);   // 1010 & 0011 = 0010 = 2
     printf("%d\\n", i | j);   // 1010 | 0011 = 1011 = 11
 
-    return 0;
+    getch();
 }`,
         },
         {
@@ -990,11 +1010,13 @@ This supplementary exam question tests output of programs involving variables, c
           type: "code",
           language: "c",
           title: "Program to Trace (July-August 2025 style)",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 #define MAX 10
 #define SQUARE(x) ((x)*(x))
 
-int main() {
+void main() {
+    clrscr();
     int a = MAX;            // a = 10 (from #define)
     const int b = 3;        // constant
     int c = SQUARE(a - 2);  // SQUARE(8) = (8)*(8) = 64
@@ -1015,7 +1037,7 @@ int main() {
     char ch = 'A' + 2;      // 'A'=65, 65+2=67 = 'C'
     printf("ch = %c (%d)\\n", ch, ch);
 
-    return 0;
+    getch();
 }`,
         },
         {

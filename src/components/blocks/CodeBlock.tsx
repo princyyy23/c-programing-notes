@@ -1,9 +1,6 @@
 import { useState } from "react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { vscDarkPlus, vs } from "react-syntax-highlighter/dist/esm/styles/prism"
-import { IconCheck, IconCopy } from "@tabler/icons-react"
 import { cn } from "@/lib/utils"
-import { useTheme } from "@/context/ThemeContext"
 
 interface CodeBlockProps {
   code: string
@@ -12,15 +9,77 @@ interface CodeBlockProps {
   className?: string
 }
 
-// Non-focusable <pre> — prevents the browser from auto-selecting code text
-// when the card expands and focus lands on the newly revealed element.
+// ─── Turbo C IDE color theme ────────────────────────────────────────────────
+// Background : #0000AA (CGA blue)
+// Keywords   : #55FFFF (bright cyan)
+// Strings    : #FFFF55 (bright yellow)
+// Comments   : #55FF55 (bright green)
+// Preprocessor: #FF5555 (bright red)
+// Default text: #FFFFFF (white)
+// Punctuation : #AAAAAA (light gray)
+const turboCTheme: { [key: string]: React.CSSProperties } = {
+  'code[class*="language-"]': {
+    color: "#FFFFFF",
+    background: "none",
+    fontFamily: '"Courier New", Courier, monospace',
+    fontSize: "13px",
+    lineHeight: "1.55",
+    textAlign: "left",
+    whiteSpace: "pre",
+    wordSpacing: "normal",
+    wordBreak: "normal",
+    hyphens: "none",
+  },
+  'pre[class*="language-"]': {
+    color: "#FFFFFF",
+    background: "#0000AA",
+    overflow: "auto",
+  },
+  // Comments → bright green
+  comment:  { color: "#55FF55" },
+  prolog:   { color: "#55FF55" },
+  doctype:  { color: "#55FF55" },
+  cdata:    { color: "#55FF55" },
+  // Punctuation → gray
+  punctuation: { color: "#AAAAAA" },
+  // Keywords → bright cyan
+  keyword:    { color: "#55FFFF" },
+  builtin:    { color: "#55FFFF" },
+  "class-name": { color: "#55FFFF" },
+  // Preprocessor directives → bright red
+  "directive-hash": { color: "#FF5555" },
+  directive:  { color: "#FF5555" },
+  macro:      { color: "#55FFFF" },
+  // Strings / chars → bright yellow
+  string:  { color: "#FFFF55" },
+  char:    { color: "#FFFF55" },
+  regex:   { color: "#FFFF55" },
+  "attr-value": { color: "#FFFF55" },
+  // Numbers → white
+  number:   { color: "#FFFFFF" },
+  boolean:  { color: "#FFFFFF" },
+  constant: { color: "#FFFFFF" },
+  // Functions, operators, variables → white
+  function:  { color: "#FFFFFF" },
+  operator:  { color: "#FFFFFF" },
+  variable:  { color: "#FFFFFF" },
+  property:  { color: "#FFFFFF" },
+  symbol:    { color: "#FFFF55" },
+  // Misc
+  important: { color: "#FF5555", fontWeight: "bold" },
+  bold:      { fontWeight: "bold" },
+  italic:    { fontStyle: "italic" },
+  inserted:  { color: "#55FF55" },
+  deleted:   { color: "#FF5555" },
+  entity:    { color: "#FF5555", cursor: "help" },
+  url:       { color: "#55FFFF" },
+  namespace: { opacity: "0.7" },
+}
+
+// Non-focusable <pre> — prevents auto-scroll to code on card expand
 function NonFocusablePre({ children, style, ...props }: React.HTMLAttributes<HTMLPreElement>) {
   return (
-    <pre
-      {...props}
-      tabIndex={-1}
-      style={{ ...style, outline: "none" }}
-    >
+    <pre {...props} tabIndex={-1} style={{ ...style, outline: "none" }}>
       {children}
     </pre>
   )
@@ -28,7 +87,6 @@ function NonFocusablePre({ children, style, ...props }: React.HTMLAttributes<HTM
 
 export function CodeBlock({ code, language, title, className }: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
-  const { isDark } = useTheme()
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(code)
@@ -36,62 +94,133 @@ export function CodeBlock({ code, language, title, className }: CodeBlockProps) 
     setTimeout(() => setCopied(false), 2000)
   }
 
+  // Derive display filename from title or language
+  const fileExt = language === "c" ? "C" : language.toUpperCase()
+  const displayName = title
+    ? title.toUpperCase()
+    : `NONAME00.${fileExt}`
+
   return (
-    <div className={cn("rounded-lg overflow-hidden border border-border my-3", className)}>
-      {/* Toolbar — WinUI 3 command bar style */}
+    <div
+      className={cn("my-3 overflow-hidden", className)}
+      style={{
+        border: "2px solid #AAAAAA",
+        fontFamily: '"Courier New", Courier, monospace',
+      }}
+    >
+      {/* ── Title bar ─────────────────────────────────────── */}
       <div
-        className={cn(
-          "flex items-center justify-between px-3 py-1.5 border-b",
-          isDark ? "border-white/8" : "border-black/6"
-        )}
-        style={{ background: isDark ? "#252525" : "#f5f5f5" }}
+        style={{
+          background: "#AAAAAA",
+          color: "#000000",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "2px 8px",
+          fontFamily: '"Courier New", Courier, monospace',
+          fontSize: "12px",
+          borderBottom: "2px solid #AAAAAA",
+          userSelect: "none",
+        }}
       >
-        <div className="flex items-center gap-2">
-          {title && (
-            <span className={cn("text-[11px] font-medium", isDark ? "text-zinc-400" : "text-zinc-500")}>
-              {title}
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className={cn("text-[10px] uppercase font-medium tracking-wide", isDark ? "text-zinc-500" : "text-zinc-400")}>
-            {language}
-          </span>
-          <button
-            onClick={handleCopy}
-            className={cn(
-              "p-1 rounded-[3px] transition-colors cursor-pointer",
-              isDark
-                ? "text-zinc-400 hover:text-zinc-200 hover:bg-white/8"
-                : "text-zinc-400 hover:text-zinc-600 hover:bg-black/6"
-            )}
-            aria-label="Copy code"
+        {/* Left: language badge + filename */}
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <span
+            style={{
+              background: "#0000AA",
+              color: "#FFFFFF",
+              padding: "0 6px",
+              fontWeight: "bold",
+              letterSpacing: "0.5px",
+              fontSize: "11px",
+            }}
           >
-            {copied
-              ? <IconCheck size={13} stroke={2} className="text-green-500" />
-              : <IconCopy size={13} stroke={2} />
-            }
-          </button>
+            {fileExt}
+          </span>
+          <span style={{ fontWeight: "bold", letterSpacing: "0.3px" }}>
+            {displayName}
+          </span>
         </div>
+
+        {/* Right: copy button styled as Turbo C button */}
+        <button
+          onClick={handleCopy}
+          aria-label="Copy code"
+          style={{
+            background: copied ? "#0000AA" : "#555555",
+            color: copied ? "#55FF55" : "#FFFFFF",
+            border: "1px solid #000000",
+            fontFamily: '"Courier New", Courier, monospace',
+            fontSize: "11px",
+            padding: "0 6px",
+            cursor: "pointer",
+            letterSpacing: "0.2px",
+            outline: "none",
+            boxShadow: copied ? "none" : "1px 1px 0 #000",
+          }}
+        >
+          {copied ? "✓ Copied" : "[ Copy ]"}
+        </button>
       </div>
 
-      {/* Code */}
+      {/* ── Code area ─────────────────────────────────────── */}
       <SyntaxHighlighter
         language={language}
-        style={isDark ? vscDarkPlus : vs}
+        style={turboCTheme}
         PreTag={NonFocusablePre}
         codeTagProps={{ style: { backgroundColor: "transparent" } }}
         customStyle={{
           margin: 0,
-          padding: "0.875rem 1rem",
-          fontSize: "12.5px",
-          lineHeight: "1.65",
-          background: isDark ? "#1e1e1e" : "#ffffff",
+          padding: "10px 14px",
+          fontSize: "13px",
+          lineHeight: "1.55",
+          background: "#0000AA",
           borderRadius: 0,
+          fontFamily: '"Courier New", Courier, monospace',
         }}
       >
         {code.trim()}
       </SyntaxHighlighter>
+
+      {/* ── Status bar ────────────────────────────────────── */}
+      <div
+        style={{
+          background: "#AAAAAA",
+          color: "#000000",
+          display: "flex",
+          alignItems: "center",
+          gap: "2px",
+          padding: "2px 0",
+          fontFamily: '"Courier New", Courier, monospace',
+          fontSize: "11px",
+          borderTop: "2px solid #AAAAAA",
+          userSelect: "none",
+          flexWrap: "wrap",
+        }}
+      >
+        {[
+          ["F1", "Help"],
+          ["F2", "Save"],
+          ["F5", "Zoom"],
+          ["F9", "Make"],
+          ["F10", "Menu"],
+        ].map(([key, label]) => (
+          <span key={key} style={{ display: "inline-flex", gap: "0" }}>
+            <span
+              style={{
+                background: "#000000",
+                color: "#AAAAAA",
+                padding: "0 4px",
+                fontWeight: "bold",
+                letterSpacing: "0.2px",
+              }}
+            >
+              {key}
+            </span>
+            <span style={{ padding: "0 8px 0 2px" }}>{label}</span>
+          </span>
+        ))}
+      </div>
     </div>
   )
 }

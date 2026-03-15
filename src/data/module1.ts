@@ -286,13 +286,15 @@ if (x != 0 && 10/x > 1) { ... }  // safe! 10/x skipped when x=0
           type: "code",
           language: "c",
           title: "Example",
-          content: `#include <stdio.h>
-#include <math.h>
+          content: `#include<stdio.h>
+#include<conio.h>
+#include<math.h>
 
-int main() {
+void main() {
+    clrscr();
     double x = 25;
     printf("sqrt = %.2lf\n", sqrt(x));
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -420,14 +422,16 @@ All math functions return \`double\`.
           type: "code",
           language: "c",
           title: "Example using sqrt and pow",
-          content: `#include <stdio.h>
-#include <math.h>
+          content: `#include<stdio.h>
+#include<conio.h>
+#include<math.h>
 
-int main() {
+void main() {
+    clrscr();
     double n = 49;
     printf("sqrt(49) = %.2lf\n", sqrt(n));
     printf("pow(2, 5) = %.2lf\n", pow(2, 5));
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -498,9 +502,11 @@ else       { max = (b > c) ? b : c; }
           type: "code",
           language: "c",
           title: "Largest of Three using Ternary",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int a, b, c, max;
     printf("Enter three numbers: ");
     scanf("%d %d %d", &a, &b, &c);
@@ -508,7 +514,7 @@ int main() {
     max = (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c);
 
     printf("Largest = %d\n", max);
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -523,14 +529,15 @@ int main() {
 **Skeleton every C program follows (in order):**
 \`\`\`c
 /* 1. Documentation / comments */
-#include <stdio.h>       /* 2. Preprocessor directives */
+#include<stdio.h>
+#include<conio.h>       /* 2. Preprocessor directives */
 #define PI 3.14159       /* 3. Macro definitions */
 int globalVar = 0;       /* 4. Global variable declarations */
 
-int main() {             /* 5. main() function */
+void main() {             /* 5. main() function */
     // local declarations
     // executable statements
-    return 0;
+    getch();
 }
 
 void helper() { ... }    /* 6. User-defined functions */
@@ -547,7 +554,7 @@ void helper() { ... }    /* 6. User-defined functions */
         {
           type: "text",
           content:
-            "A standard C program structure:\n1. Documentation/comment section\n2. Link section (`#include`)\n3. Definition section (`#define`)\n4. Global declaration section\n5. `main()` function\n6. User-defined function definitions\n\nSimple template:\n```c\n#include <stdio.h>\n\nint main() {\n    // declarations\n    // statements\n    return 0;\n}\n```",
+            "A standard C program structure:\n1. Documentation/comment section\n2. Link section (`#include`)\n3. Definition section (`#define`)\n4. Global declaration section\n5. `main()` function\n6. User-defined function definitions\n\nSimple template:\n```c\n#include<stdio.h>\n\nvoid main() {\n    // declarations\n    // statements\n    return 0;\n}\n```",
         },
       ],
     },
@@ -590,9 +597,11 @@ else
           type: "code",
           language: "c",
           title: "C Program - Even or Odd",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n;
     printf("Enter number: ");
     scanf("%d", &n);
@@ -602,7 +611,7 @@ int main() {
     else
         printf("Odd number\n");
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -636,15 +645,17 @@ else            printf("Zero");
           type: "code",
           language: "c",
           title: "Positive/Negative using Ternary",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n;
     printf("Enter number: ");
     scanf("%d", &n);
 
     (n > 0) ? printf("Positive\n") : (n < 0) ? printf("Negative\n") : printf("Zero\n");
-    return 0;
+    getch();
 }`,
         },
       ],

@@ -98,9 +98,11 @@ if(x>0) { if(x%2==0) printf("Even+"); }       // nested if
           type: "code",
           language: "c",
           title: "Examples",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i;
 
     for (i = 1; i <= 5; i++) {
@@ -121,7 +123,7 @@ int main() {
 
 end:
     printf("Goto executed\n");
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -219,9 +221,11 @@ default:
           type: "code",
           language: "c",
           title: "Vowel Check using switch",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     char ch;
     printf("Enter a character: ");
     scanf(" %c", &ch);
@@ -234,7 +238,7 @@ int main() {
         default:
             printf("Not a vowel\n");
     }
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -265,9 +269,11 @@ printf("%s", days[day-1]);  // day-1 converts 1-indexed to 0-indexed
           type: "code",
           language: "c",
           title: "Day of Week using switch",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int day;
     printf("Enter day number (1-7): ");
     scanf("%d", &day);
@@ -282,7 +288,7 @@ int main() {
         case 7: printf("Saturday\n"); break;
         default: printf("Invalid input\n");
     }
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -325,9 +331,11 @@ for(i = 1; i <= n; i++) {       // rows
           type: "code",
           language: "c",
           title: "Sample pattern programs (core logic)",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i, j;
 
     // 1) 1 / 2 2 / 3 3 3 / ...
@@ -352,7 +360,7 @@ int main() {
         printf("\n");
     }
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -385,9 +393,11 @@ for(i = 1; i <= n; i++) {
           type: "code",
           language: "c",
           title: "Fibonacci Series",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n, a = 0, b = 1, c, i;
     printf("Enter number of terms: ");
     scanf("%d", &n);
@@ -399,7 +409,7 @@ int main() {
         b = c;
     }
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -434,9 +444,11 @@ for(i = 2; i <= 100; i++) {
           type: "code",
           language: "c",
           title: "Prime Numbers 1 to 100",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i, j, isPrime;
 
     for (i = 2; i <= 100; i++) {
@@ -450,7 +462,7 @@ int main() {
         if (isPrime) printf("%d ", i);
     }
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -552,9 +564,11 @@ if(original == rev) printf("Palindrome");
           type: "code",
           language: "c",
           title: "Palindrome Number",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n, original, rev = 0, rem;
     printf("Enter number: ");
     scanf("%d", &n);
@@ -571,7 +585,7 @@ int main() {
     else
         printf("Not palindrome\n");
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -603,9 +617,11 @@ for(i = 1; i <= n; i++)
           type: "code",
           language: "c",
           title: "Even numbers between 1 and n",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n, i;
     printf("Enter n: ");
     scanf("%d", &n);
@@ -613,7 +629,7 @@ int main() {
     for (i = 2; i <= n; i += 2)
         printf("%d ", i);
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -653,9 +669,11 @@ do {
           type: "code",
           language: "c",
           title: "Sum of digits using do-while",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n, sum = 0, rem;
     printf("Enter number: ");
     scanf("%d", &n);
@@ -667,7 +685,7 @@ int main() {
     } while (n != 0);
 
     printf("Sum of digits = %d\n", sum);
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -730,9 +748,11 @@ default:
           type: "code",
           language: "c",
           title: "Vowel check (implemented form)",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     char ch;
 
     printf("Enter an alphabet: ");
@@ -747,7 +767,7 @@ int main() {
             printf("%c is not a vowel\n", ch);
     }
 
-    return 0;
+    getch();
 }`,
         },
       ],

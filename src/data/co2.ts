@@ -70,9 +70,11 @@ if (condition1) {
           type: "code",
           language: "c",
           title: "Example: Nested if",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int age = 25, hasID = 1;
 
     if (age >= 18) {
@@ -85,16 +87,18 @@ int main() {
         printf("Entry not allowed. You are underage.\\n");
     }
 
-    return 0;
+    getch();
 }`,
         },
         {
           type: "code",
           language: "c",
           title: "Example: else-if Ladder (Grade System)",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int marks;
 
     printf("Enter marks: ");
@@ -112,7 +116,7 @@ int main() {
         printf("Grade: F (Fail)\\n");
     }
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -155,9 +159,11 @@ for (init; condition; update) {
           type: "code",
           language: "c",
           title: "Example: Print only odd numbers from 1 to 10",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i;
 
     printf("Odd numbers from 1 to 10:\\n");
@@ -170,7 +176,7 @@ int main() {
     }
 
     // Output: 1 3 5 7 9
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -204,9 +210,11 @@ int main() {
           type: "code",
           language: "c",
           title: "Example: while loop",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i = 1;
 
     // while loop: condition checked BEFORE body
@@ -216,16 +224,18 @@ int main() {
     }
     // Output: 1 2 3 4 5
 
-    return 0;
+    getch();
 }`,
         },
         {
           type: "code",
           language: "c",
           title: "Example: do-while loop",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i = 1;
 
     // do-while loop: body executes FIRST, then condition checked
@@ -235,7 +245,7 @@ int main() {
     } while (i <= 5);
     // Output: 1 2 3 4 5
 
-    return 0;
+    getch();
 }`,
         },
         {
@@ -280,9 +290,11 @@ int main() {
           type: "code",
           language: "c",
           title: "Calculator using Switch Case",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     char operator;
     float num1, num2, result;
 
@@ -321,7 +333,7 @@ int main() {
             printf("Invalid operator!\\n");
     }
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -357,9 +369,11 @@ PQRST
           type: "code",
           language: "c",
           title: "Pattern: P PQ PQR PQRS PQRST",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i, j, n;
 
     printf("Enter number of rows: ");
@@ -372,7 +386,7 @@ int main() {
         printf("\\n");
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -399,9 +413,11 @@ PQRST
           type: "code",
           language: "c",
           title: "Sum of Squares Series",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n, i, sum = 0;
 
     printf("Enter value of n: ");
@@ -413,7 +429,7 @@ int main() {
 
     printf("Sum of series (1*1)+(2*2)+...+(%d*%d) = %d\\n", n, n, sum);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -484,9 +500,11 @@ for (...) {
           type: "code",
           language: "c",
           title: "Example: break and continue",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i;
 
     // --- break example ---
@@ -509,7 +527,7 @@ int main() {
     printf("\\n");
     // Output: 1 3 5 7 9
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -546,10 +564,12 @@ The header file **\`<math.h>\`** provides mathematical functions. Two commonly u
           type: "code",
           language: "c",
           title: "Example: sqrt() and pow()",
-          content: `#include <stdio.h>
-#include <math.h>
+          content: `#include<stdio.h>
+#include<conio.h>
+#include<math.h>
 
-int main() {
+void main() {
+    clrscr();
     double num = 25.0;
     double base = 2.0, exponent = 5.0;
 
@@ -562,7 +582,7 @@ int main() {
            base, exponent, pow(base, exponent));
     // Output: 2 raised to power 5 = 32.00
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -580,9 +600,11 @@ int main() {
           type: "code",
           language: "c",
           title: "Menu-Driven Calculator using Switch Case",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int choice;
     float a, b;
 
@@ -621,7 +643,7 @@ int main() {
             printf("Invalid choice! Please select 1-4.\\n");
     }
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -656,9 +678,11 @@ A **palindrome number** is a number that reads the same forwards and backwards.
           type: "code",
           language: "c",
           title: "Palindrome Check",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int num, originalNum, reversedNum, remainder;
 
     printf("Enter a number: ");
@@ -681,7 +705,7 @@ int main() {
         printf("%d is NOT a Palindrome number.\\n", originalNum);
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -742,9 +766,11 @@ Example 2:
           type: "code",
           language: "c",
           title: "Addition of n Numbers using for Loop",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n, i;
     float num, sum = 0.0;
 
@@ -759,7 +785,7 @@ int main() {
 
     printf("Sum of %d numbers = %.2f\\n", n, sum);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -859,9 +885,11 @@ EEEEE
           type: "code",
           language: "c",
           title: "Pattern: A BB CCC DDDD EEEEE",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int i, j, n;
 
     printf("Enter number of rows: ");
@@ -874,7 +902,7 @@ int main() {
         printf("\\n");
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1061,9 +1089,11 @@ if (condition1) {
           type: "code",
           language: "c",
           title: "Arithmetic Operations using Switch Case",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int a, b, choice;
 
     printf("Enter two integers: ");
@@ -1104,7 +1134,7 @@ int main() {
             printf("Invalid choice!\\n");
     }
 
-    return 0;
+    getch();
 }`,
         },
       ],
@@ -1122,9 +1152,11 @@ int main() {
           type: "code",
           language: "c",
           title: "Even Numbers from 1 to n using while Loop",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n, i = 2;
 
     printf("Enter value of n: ");
@@ -1138,7 +1170,7 @@ int main() {
     }
 
     printf("\\n");
-    return 0;
+    getch();
 }
 
 /*
@@ -1163,9 +1195,11 @@ Example:
           type: "code",
           language: "c",
           title: "Check Positive, Negative or Zero",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int num;
 
     printf("Enter a number: ");
@@ -1179,7 +1213,7 @@ int main() {
         printf("The number is Zero.\\n");
     }
 
-    return 0;
+    getch();
 }`,
         },
         {
@@ -1219,9 +1253,11 @@ int main() {
           type: "code",
           language: "c",
           title: "Display n Natural Numbers and Their Sum",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n, i, sum = 0;
 
     printf("Enter a positive integer n: ");
@@ -1236,7 +1272,7 @@ int main() {
 
     printf("\\nSum of first %d natural numbers = %d\\n", n, sum);
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1262,9 +1298,11 @@ Example:
           type: "code",
           language: "c",
           title: "Weekday Name using Switch Case",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int day;
 
     printf("Enter weekday number (1-7): ");
@@ -1296,7 +1334,7 @@ int main() {
             printf("Invalid input! Enter a number between 1 and 7.\\n");
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1482,9 +1520,11 @@ The program should also validate that marks are between 0 and 100.`,
           type: "code",
           language: "c",
           title: "Student Result using Nested if-else",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     float marks;
 
     printf("Enter student's marks (0-100): ");
@@ -1513,7 +1553,7 @@ int main() {
         printf("Invalid marks! Please enter between 0 and 100.\\n");
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1554,9 +1594,11 @@ A **prime number** is a natural number greater than 1 that has **no positive div
           type: "code",
           language: "c",
           title: "Prime Number Check",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int n, i, isPrime = 1;
 
     printf("Enter a positive integer: ");
@@ -1579,7 +1621,7 @@ int main() {
         printf("%d is NOT a Prime number.\\n", n);
     }
 
-    return 0;
+    getch();
 }
 
 /*
@@ -1603,9 +1645,11 @@ Example 4: Input: 1   -> Output: 1 is NOT a Prime number.
           type: "code",
           language: "c",
           title: "Sum of Digits using do-while Loop",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 
-int main() {
+void main() {
+    clrscr();
     int num, sum = 0, remainder, originalNum;
 
     printf("Enter a number: ");
@@ -1625,7 +1669,7 @@ int main() {
 
     printf("Sum of digits of %d = %d\\n", originalNum, sum);
 
-    return 0;
+    getch();
 }
 
 /*

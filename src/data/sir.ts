@@ -27,12 +27,15 @@ export const sir: CourseOutcome = {
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 void main() {
+    clrscr();
     int a,b,c, sum;
     printf("Enter 3 numbers\\n");
     scanf("%d%d%d",&a,&b,&c);
     sum=a+b+c;
     printf("Result is: %d",sum);
+    getch();
 }`,
         },
       ],
@@ -52,11 +55,14 @@ void main() {
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 void main() {
+    clrscr();
     int number;
     printf("Enter a number:");
     scanf("%d ",&number);
     (number%2==0) ? printf("Number is Even") : printf("Number is Odd");
+    getch();
 }`,
         },
       ],
@@ -76,12 +82,15 @@ void main() {
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 void main() {
+    clrscr();
     int a,b,c,greatest;
     printf("Enter three numbers:\\n");
     scanf("%d%d%d",&a,&b,&c);
     greatest = (a>b) ? (a>c ? a:c) : (b>c ? b:c);
     printf("The greatest Number is: %d", greatest);
+    getch();
 }`,
         },
       ],
@@ -101,7 +110,9 @@ void main() {
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int radius,length,breadth;
     float area;
     const float PI = 3.14;
@@ -113,6 +124,7 @@ void main(){
     scanf("%d%d",&length,&breadth);
     area = length * breadth;
     printf("Area of circle is:%f",area);
+    getch();
 }`,
         },
       ],
@@ -132,7 +144,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 void main() {
+    clrscr();
     int a,b,t;
     printf("Enter any two numbers\\n");
     scanf("%d%d",&a,&b);
@@ -140,6 +154,7 @@ void main() {
     a=b;
     b=t;
     printf("Answer is=%d%d",a,b);
+    getch();
 }`,
         },
       ],
@@ -159,7 +174,9 @@ void main() {
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 void main() {
+    clrscr();
     int a,b;
     printf("Enter the value of A and B");
     scanf("%d%d",&a,&b);
@@ -168,6 +185,7 @@ void main() {
     b=a-b;
     a=a-b;
     printf("\\nAfter Swapping: A=%d and B=%d",a,b);
+    getch();
 }`,
         },
       ],
@@ -191,7 +209,9 @@ void main() {
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int year;
     printf("Enter a year:");
     scanf("%d",&year);
@@ -199,6 +219,7 @@ void main(){
         printf("Leap Year");
     else
         printf("Not a leap year");
+    getch();
 }`,
         },
       ],
@@ -218,7 +239,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int a,b,c;
     printf("Enter three numbers:");
     scanf("%d%d%d",&a,&b,&c);
@@ -228,6 +251,7 @@ void main(){
         printf("largest=%d", b);
     else
         printf("largest=%d", c);
+    getch();
 }`,
         },
       ],
@@ -247,8 +271,10 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 #include<math.h>
-void main(){
+void main() {
+    clrscr();
     float a,b,c,d,r1,r2,rp,ip;
     printf("Enter value of a,b,c:");
     scanf("%f%f%f",&a,&b,&c);
@@ -266,6 +292,7 @@ void main(){
         ip = d/2*a;
         printf("Roots are:%0.2f+i%0.2f and %0.2f-i%0.2f",rp,ip,rp,ip);
     }
+    getch();
 }`,
         },
       ],
@@ -285,7 +312,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int a,b,choice;
     float c;
     char ans='n';
@@ -334,13 +363,16 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,i,sum=0;
     printf("Enter the value of n:");
     scanf("%d",&n);
     for(i=1;i<=n;i++)
         sum=sum+i;
     printf("Sum of n numbers: %d",sum);
+    getch();
 }`,
         },
       ],
@@ -360,13 +392,16 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int i,n,fact=1;
     printf("Enter the no");
     scanf("%d",&n);
     for(i=1;i<=n;i++)
         fact=fact*i;
     printf("Factorial is: %d",fact);
+    getch();
 }`,
         },
       ],
@@ -386,8 +421,10 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 void main()
 {
+    clrscr();
     int i,no,a=0,b=1,c;
     printf("Enter the value of n:");
     scanf("%d",&no);
@@ -399,6 +436,7 @@ void main()
         a=b;
         b=c;
     }
+    getch();
 }`,
         },
       ],
@@ -418,7 +456,9 @@ void main()
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,i;
     printf("Enter a number:");
     scanf("%d",&n);
@@ -430,6 +470,7 @@ void main(){
             printf("%d\\n",i);
         i++;
     }
+    getch();
 }`,
         },
       ],
@@ -449,7 +490,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,i=2,prime=1;
     printf("Enter the No:");
     scanf("%d",&n);
@@ -466,6 +509,7 @@ void main(){
         printf("%d is a Prime no",n);
     else
         printf("%d is not a Prime no",n);
+    getch();
 }`,
         },
       ],
@@ -485,7 +529,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int limit=100,i,n,prime;
     for(n=2;n<=limit;n++)
     {
@@ -504,6 +550,7 @@ void main(){
             printf("%d\\n",n);
         }
     }
+    getch();
 }`,
         },
       ],
@@ -523,7 +570,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,dig,sum=0,p=1;
     printf("Enter any number:");
     scanf("%d",&n);
@@ -536,6 +585,7 @@ void main(){
     }while(n!=0);
     printf("Sum is:%d",sum);
     printf("Product is:%d",p);
+    getch();
 }`,
         },
       ],
@@ -555,7 +605,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,cp,dig,sum=0;
     printf("Enter any number:");
     scanf("%d",&n);
@@ -570,6 +622,7 @@ void main(){
         printf("Armstrong Number");
     else
         printf("Not an Armstrong Number");
+    getch();
 }`,
         },
       ],
@@ -589,7 +642,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,temp,dig,sum,limit=1000;
     for(n=1; n<=limit; n++)
     {
@@ -604,6 +659,7 @@ void main(){
         if(temp==sum)
             printf("%d\\n",no);
     }
+    getch();
 }`,
         },
       ],
@@ -623,7 +679,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,digit,rev=0;
     printf("Enter a number");
     scanf("%d",&n);
@@ -634,6 +692,7 @@ void main(){
         n=n/10;
     }
     printf("Reverse is: %d",rev);
+    getch();
 }`,
         },
       ],
@@ -653,7 +712,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,digit,rev=0,og;
     printf("Enter a number:");
     scanf("%d",&n);
@@ -668,6 +729,7 @@ void main(){
         printf("Palindrome Number");
     else
         printf("Not a Palindrome Number");
+    getch();
 }`,
         },
       ],
@@ -687,7 +749,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n1,n2,lcm,gcd;
     printf("Enter two numbers:");
     scanf("%d%d",&n1,&n2);
@@ -706,6 +770,7 @@ void main(){
     while(n1%gcd!=0 || n2%gcd!=0)
         gcd--;
     printf("LCM=%d\\nGCD=%d",lcm,gcd);
+    getch();
 }`,
         },
       ],
@@ -725,7 +790,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     long int bn = 0;
     int digit, n, temp = 1;
     printf("Enter a Number:");
@@ -737,6 +804,7 @@ void main(){
         n = n/2;
     }
     printf("Binary Number is: %ld",bn);
+    getch();
 }`,
         },
       ],
@@ -760,7 +828,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int num;
     printf("Enter the number:");
     scanf("%d",&num);
@@ -768,6 +838,7 @@ void main(){
         printf("\\n%d is even number",num);
     else
         printf("\\n%d is odd number",num);
+    getch();
 }`,
         },
       ],
@@ -787,7 +858,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int a,b,c;
     printf("Enter three integers:");
     scanf("%d%d%d",&a,&b,&c);
@@ -803,6 +876,7 @@ void main(){
         else
             printf("c is biggest");
     }
+    getch();
 }`,
         },
       ],
@@ -822,7 +896,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     char c;
     printf("Enter a character:");
     scanf("%c",&c);
@@ -830,6 +906,7 @@ void main(){
         printf("%c is an alphabet",c);
     else
         printf("%c is not an alphabet",c);
+    getch();
 }`,
         },
       ],
@@ -849,7 +926,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int month;
     printf("Enter a month number:");
     scanf("%d",&month);
@@ -868,6 +947,7 @@ void main(){
         case 12:printf("December"); break;
         default: printf("Invalid number");
     }
+    getch();
 }`,
         },
       ],
@@ -887,7 +967,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,count=0;
     printf("Enter number:");
     scanf("%d",&n);
@@ -895,6 +977,7 @@ void main(){
         count++;
         n=n/10;
     }
+    getch();
 }`,
         },
       ],
@@ -913,8 +996,10 @@ void main(){
         {
           type: "code",
           language: "c",
-          content: `#include <stdio.h>
-void main(){
+          content: `#include<stdio.h>
+#include<conio.h>
+void main() {
+    clrscr();
     int n,i,j;
     printf("Enter an integer:");
     scanf("%d",&n);
@@ -923,6 +1008,7 @@ void main(){
             printf("%d\\t", i*j);
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -946,7 +1032,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     inti,j,n=4;
     for(i=0;i<n;i++){
         for(j=0;j<n;j++){
@@ -955,6 +1043,7 @@ void main(){
         n--;
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -974,7 +1063,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int i,j;
     for(i=1;i<=3;i++){
         for(j=1;j<=3-i;j++){
@@ -994,6 +1085,7 @@ void main(){
         }
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -1013,7 +1105,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int i,j;
     for(i=1;i<=4;i++){
         for(j=1;j<=4-i;j++){
@@ -1027,6 +1121,7 @@ void main(){
         }
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -1046,7 +1141,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int no,i,j;
     printf("Enter no of rows\\n");
     scanf("%d",&no);
@@ -1056,6 +1153,7 @@ void main(){
         }
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -1075,7 +1173,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int no,i,j;
     printf("Enter no of rows\\n");
     scanf("%d",&no);
@@ -1085,6 +1185,7 @@ void main(){
         }
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -1104,6 +1205,7 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 int facto(int no){
     int i,fact=1;
     for(i=1;i<=no;i++){
@@ -1111,7 +1213,8 @@ int facto(int no){
     }
     return fact;
 }
-void main(){
+void main() {
+    clrscr();
     int no,fa,i,j;
     printf("Enter no\\n");
     scanf("%d",&no);
@@ -1125,6 +1228,7 @@ void main(){
         }
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -1144,7 +1248,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int i,j,n;
     printf("Enter the number of lines:");
     scanf("%d",&n);
@@ -1160,6 +1266,7 @@ void main(){
         }
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -1179,8 +1286,10 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 void main()
 {
+    clrscr();
     int i,j,n;
     printf("Enter the number of * in the middle line:");
     scanf("%d",&n);
@@ -1202,6 +1311,7 @@ void main()
         }
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -1221,7 +1331,9 @@ void main()
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int i,j,n,k;
     printf("Enter the number of lines:");
     scanf("%d",&n);
@@ -1232,6 +1344,7 @@ void main(){
         }
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -1251,7 +1364,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int i,j,n=5,k;
     for(i=1;i<=n;i++){
         for(j=1,k=1;j<=i;j++){
@@ -1260,6 +1375,7 @@ void main(){
         }
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -1278,8 +1394,10 @@ void main(){
         {
           type: "code",
           language: "c",
-          content: `#include <stdio.h>
-void main(){
+          content: `#include<stdio.h>
+#include<conio.h>
+void main() {
+    clrscr();
     int i,j,k,l,n, alpha=65;
     printf("Enter line no:");
     scanf("%d",&n);
@@ -1295,6 +1413,7 @@ void main(){
         }
         printf("\\n");
     }
+    getch();
 }`,
         },
       ],
@@ -1318,14 +1437,17 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 #include<math.h>
-void main(){
+void main() {
+    clrscr();
     int n, i, sum = 0;
     printf("Enter any integer:");
     scanf("%d",&n);
     for(i=1;i<=n;i++)
         sum = sum + pow (i,i);
     printf("\\nSum = %d",sum);
+    getch();
 }`,
         },
       ],
@@ -1345,7 +1467,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,i,j;
     float sum = 0;
     printf("Enter any integer:");
@@ -1353,6 +1477,7 @@ void main(){
     for(i=1,j=1;i<=n;i++,j=j+2)
         sum = sum + (float)j/(j+1);
     printf("\\nSum=%f",sum);
+    getch();
 }`,
         },
       ],
@@ -1372,7 +1497,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     int n,i,j,s=1;
     float sum = 0;
     printf("Enter any integer:");
@@ -1383,6 +1510,7 @@ void main(){
         s=-s;
     }
     printf("\\nSum=%f",sum);
+    getch();
 }`,
         },
       ],
@@ -1401,8 +1529,10 @@ void main(){
         {
           type: "code",
           language: "c",
-          content: `#include <stdio.h>
-void main(){
+          content: `#include<stdio.h>
+#include<conio.h>
+void main() {
+    clrscr();
     float n,sum=0, f=1, i;
     printf("Enter the value:");
     scanf("%f",&n);
@@ -1412,6 +1542,7 @@ void main(){
         sum = sum + (i/f);
     }
     printf("Sum of the series= %f",sum);
+    getch();
 }`,
         },
       ],
@@ -1431,7 +1562,9 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
-void main(){
+#include<conio.h>
+void main() {
+    clrscr();
     float n,sum=0, f=1, i, s=1,x;
     printf("Enter value of n and x:");
     scanf("%f%f", &n,&x);
@@ -1441,6 +1574,7 @@ void main(){
         s=-s;
     }
     printf("Sum of the series= %f",sum);
+    getch();
 }`,
         },
       ],
@@ -1460,8 +1594,10 @@ void main(){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 #include<math.h>
-void main(){
+void main() {
+    clrscr();
     int i,n,fact=1,sign=-1;
     float x,num,sum,term;
     printf("Enter the angle in degrees and value of n");
@@ -1476,6 +1612,7 @@ void main(){
         sign=-sign;
     }
     printf("Value of series= %f",sum);
+    getch();
 }`,
         },
       ],
@@ -1498,9 +1635,11 @@ void main(){
         {
           type: "code",
           language: "c",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 int add(int, int);
-void main(){
+void main() {
+    clrscr();
     int num1,num2,sum;
     printf("Enters two numbers");
     scanf("%d%d",&num1,&num2);
@@ -1511,6 +1650,7 @@ int add(int a,int b) {
     int c;
     c=a + b;
     return c;
+    getch();
 }`,
         },
       ],
@@ -1530,9 +1670,11 @@ int add(int a,int b) {
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 int fact (int);
 void main()
 {
+    clrscr();
     int n,f;
     printf("Enter the values of n:");
     scanf("%d",&n);
@@ -1545,6 +1687,7 @@ int fact (int no)
     for(i=1;i<=no;i++)
         f=f*i;
     return f;
+    getch();
 }`,
         },
       ],
@@ -1563,9 +1706,11 @@ int fact (int no)
         {
           type: "code",
           language: "c",
-          content: `#include <stdio.h>
+          content: `#include<stdio.h>
+#include<conio.h>
 void lcm_gcd(int,int);
 void main() {
+    clrscr();
     int no1,no2;
     printf("Enter two Numbers\\n");
     scanf("%d %d",&no1,&no2);
@@ -1591,6 +1736,7 @@ void lcm_gcd(int n1,int n2) {
     lcm = n1*n2/gcd;
     printf("GCD of %d and %d = %d\\n",n1,n2,gcd);
     printf("LCM of %d and %d = %d\\n",n1,n2,lcm);
+    getch();
 }`,
         },
       ],
@@ -1610,8 +1756,10 @@ void lcm_gcd(int n1,int n2) {
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 int fact(int);
 void main() {
+    clrscr();
     int n;
     printf("Enter a number");
     scanf("%d",&n);
@@ -1622,6 +1770,7 @@ int fact(int n) {
         return 1;
     else
         return n*fact(n-1);
+    getch();
 }`,
         },
       ],
@@ -1641,8 +1790,10 @@ int fact(int n) {
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 int fibonacci(int);
 void main() {
+    clrscr();
     int n, i = 0, c;
     printf("Enter A value:");
     scanf("%d",&n);
@@ -1659,6 +1810,7 @@ int fibonacci(int n){
         return 1;
     else
         return (fibonacci(n-1) + fibonacci(n-2));
+    getch();
 }`,
         },
       ],
@@ -1678,8 +1830,10 @@ int fibonacci(int n){
           type: "code",
           language: "c",
           content: `#include<stdio.h>
+#include<conio.h>
 int pwr(int, int);
 void main() {
+    clrscr();
     int bs,in,ans;
     printf("Enter base and index");
     scanf("%d%d",&bs,&in);
@@ -1691,6 +1845,7 @@ int pwr(int base, int index) {
         return 1;
     else
         return (base*pwr(base,index-1));
+    getch();
 }`,
         },
       ],
