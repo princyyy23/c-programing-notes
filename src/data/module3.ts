@@ -13,10 +13,29 @@ export const module3: CourseOutcome = {
       title: "What is function? Explain function declaration, calling and definition with example.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `Core mnemonic: DDC = Declare, Define, Call.
-    - Declaration tells compiler signature, definition gives body, call executes function.
-    - Code-reading tip: execution enters function on call and returns value/control back.
-    - Exam tip: draw tiny flow main -> function -> main(return).`,
+      notes: `**Three-step function life cycle — mnemonic DDC = Declare, Define, Call**
+
+| Step | What it is | Example |
+|------|-----------|---------|
+| **Declaration** (prototype) | Tells compiler the signature | \`int add(int, int);\` |
+| **Definition** | Provides the actual implementation | \`int add(int a, int b){ return a+b; }\` |
+| **Call** (invocation) | Executes the function | \`result = add(4, 6);\` |
+
+\`\`\`c
+int add(int, int);           // 1. DECLARE
+int main() {
+    int s = add(4, 6);       // 2. CALL
+    printf("Sum = %d\n", s);
+    return 0;
+}
+int add(int a, int b) {      // 3. DEFINE
+    return a + b;
+}
+\`\`\`
+
+**Execution flow:** \`main()\` → calls \`add()\` → \`add()\` computes → returns value → back to \`main()\`
+
+**Exam tip:** Draw the flow arrow in exam: \`main() ──calls──▶ add() ──returns──▶ main()\``,
       blocks: [
         {
           type: "text",
@@ -48,10 +67,27 @@ int add(int a, int b) { // definition
       title: "Differentiate between function definition and function declaration.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `One-line memory: Declaration says WHAT, Definition says HOW.
-    - Declaration ends with semicolon, definition contains function block.
-    - Same function can have many declarations but one definition.
-    - Exam tip: write both forms side-by-side with same function name.`,
+      notes: `**One-liner memory: Declaration = WHAT (announces), Definition = HOW (implements)**
+
+| Feature | Declaration (Prototype) | Definition |
+|---------|------------------------|------------|
+| Has body? | No | Yes |
+| Ends with? | Semicolon \`;\` | Closing brace \`}\` |
+| Parameter names? | Optional | Required |
+| Frequency | Can appear multiple times | Only once |
+| Memory allocated? | No | Yes (for code) |
+
+**Side-by-side example:**
+\`\`\`c
+int add(int, int);          // DECLARATION — no body, ends with ;
+int add(int a, int b) {     // DEFINITION — has body, no trailing ;
+    return a + b;
+}
+\`\`\`
+
+**Why declaration before main?** If a function is defined AFTER it is called, the compiler doesn't know its signature — prototype solves this.
+
+**Parameter name rule:** In declaration, \`int add(int, int)\` is valid (types only). In definition, names are required.`,
       blocks: [
         {
           type: "text",
@@ -65,10 +101,31 @@ int add(int a, int b) { // definition
       title: "Define function. Write a program to find factorial of a number using function.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `Factorial rule: n! = product from 1 to n; 0! = 1.
-    - Loop trace tip: track fact update each iteration (fact *= i).
-    - Use long long to reduce overflow risk for moderate n.
-    - Exam tip: handle negative input with message before calling factorial logic.`,
+      notes: `**Factorial: n! = 1 × 2 × 3 × ... × n. Special case: 0! = 1**
+
+\`\`\`c
+long long factorial(int n) {
+    long long fact = 1;  // init to 1, NOT 0!
+    int i;
+    for(i = 1; i <= n; i++)
+        fact *= i;
+    return fact;
+}
+\`\`\`
+
+**Why initialise \`fact = 1\` not 0?** Multiplying by 0 makes everything 0 forever!
+
+**Favourite values to memorise:**
+| n | n! |
+|---|----|
+| 0 | 1 (by definition) |
+| 5 | 120 |
+| 6 | 720 |
+| 10 | 3,628,800 |
+
+**Overflow warning:** 13! = 6,227,020,800 exceeds \`INT_MAX\` (~2.1B). Use \`long long\` for n > 12.
+
+**Handle negative input:** Add \`if(n < 0) { printf("Error"); return -1; }\` before the loop.`,
       blocks: [
         {
           type: "code",
@@ -104,10 +161,25 @@ int main() {
       title: "Write a program to generate Fibonacci series of 10 numbers using function.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `Function role here is reusable sequence generator.
-    - Variable transition: a,b hold current pair; c stores next term.
-    - Mnemonic: PSM = Print, Sum, Move (a=b, b=c).
-    - Exam tip: mention why function returning void is fine for direct printing.`,
+      notes: `**Function role: generates and prints the entire sequence — void return is fine for direct printing**
+
+**Three-variable rolling method — mnemonic PSM = Print, Sum, Move:**
+\`\`\`c
+void printFibonacci(int n) {
+    int a = 0, b = 1, c, i;
+    for(i = 1; i <= n; i++) {
+        printf("%d ", a);  // PRINT current
+        c = a + b;         // SUM to get next
+        a = b; b = c;      // MOVE forward
+    }
+}
+\`\`\`
+
+**For 10 terms:** 0 1 1 2 3 5 8 13 21 34
+
+**Update order is critical:** Compute \`c = a+b\` FIRST, then assign \`a=b\`, then \`b=c\`. Swapping gives wrong sequence!
+
+**Alternative design:** If function should RETURN the n-th term (not print all), make it \`int fibonacci(int n)\` and return \`a\` after the loop.`,
       blocks: [
         {
           type: "code",
@@ -137,10 +209,21 @@ int main() {
       title: "Write a program to calculate square of a number using function.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `Best simple abstraction example: square(n) returns n*n.
-    - Shows benefit of function reuse and cleaner main code.
-    - Data-flow tip: input in main, processing in function, output in main.
-    - Exam tip: add one dry run (n=5 -> 25).`,
+      notes: `**Simplest function example: input → processing → output separation (modular design)**
+
+\`\`\`c
+int square(int n) {
+    return n * n;   // single computation, single return
+}
+\`\`\`
+
+**Data flow principle:** Input in \`main()\` → processing in function → output back in \`main()\`.
+
+**Dry run trace:** \`square(5)\` → \`5 * 5\` = **25** ✓ | \`square(7)\` → **49** ✓
+
+**Don't use \`pow(n,2)\` for squaring integers** — \`n*n\` is faster, no floating-point conversion, no \`<math.h>\` needed.
+
+**Extend the concept:** Same design for cube: \`return n*n*n\` | absolute value: \`return (n>0)?n:-n\` | reciprocal: \`return 1.0/n\``,
       blocks: [
         {
           type: "code",
@@ -167,10 +250,27 @@ int main() {
       title: "Write a program to check entered number is even or odd using function.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `Boolean-style design: function returns 1 (true) or 0 (false).
-    - Test condition n%2==0 inside helper function keeps main readable.
-    - Mnemonic: MOD2 rule decides parity instantly.
-    - Exam tip: explain that return type int is common for true/false in C.`,
+      notes: `**Boolean-style return: 1 = true (even), 0 = false (odd)**
+
+\`\`\`c
+int isEven(int n) {
+    return (n % 2 == 0);  // expression evaluates to 1 or 0
+}
+\`\`\`
+
+**Why return \`int\` for true/false?** C has no \`bool\` type (in C89/C90). Returning \`int\` with 1=true, 0=false is the C convention. (\`<stdbool.h>\` was added in C99.)
+
+**Clean usage in main:**
+\`\`\`c
+if (isEven(n))
+    printf("Even");
+else
+    printf("Odd");
+\`\`\`
+
+**Naming convention:** \`isXxx()\` signals a boolean-style function — \`isAlpha\`, \`isDigit\`, \`isPrime\`. Exam markers appreciate naming that shows intent.
+
+**Bitwise trick (bonus):** \`return !(n & 1)\` — same result, shows knowledge of bitwise operators.`,
       blocks: [
         {
           type: "code",
@@ -202,10 +302,30 @@ int main() {
       title: "Write a program to check entered number is prime or not using function.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `Prime shortcut: search divisor from 2 to sqrt(n) only.
-    - If any divisor exists -> composite; else prime.
-    - Must handle n<=1 as non-prime.
-    - Exam tip: explain why sqrt bound reduces iterations significantly.`,
+      notes: `**Prime = no divisors from 2 to √n exist**
+
+\`\`\`c
+int isPrime(int n) {
+    int i;
+    if(n <= 1) return 0;          // 0 and 1 are NOT prime
+    for(i = 2; i*i <= n; i++) {   // check up to √n
+        if(n % i == 0) return 0;  // divisor found → not prime
+    }
+    return 1;                     // no divisors → prime
+}
+\`\`\`
+
+**Why \`i*i <= n\` (not \`i <= n\`)?** Every divisor pair (a, b) satisfies a×b = n. One must be ≤ √n — checking up to √n finds all of them and saves ~half the iterations.
+
+**Must handle edge cases:**
+| Input | isPrime | Reason |
+|-------|---------|--------|
+| 0 or 1 | 0 (false) | Not prime by definition |
+| 2 | 1 (true) | Only even prime! |
+| 4 | 0 (false) | 4 = 2×2 |
+| 7 | 1 (true) | No divisors from 2 to 2 |
+
+**Exam bonus:** Explain the √n optimisation with one sentence — "One factor of every composite number must be ≤ √n."`,
       blocks: [
         {
           type: "code",
@@ -242,10 +362,27 @@ int main() {
       title: "Write a program to find largest number among three numbers using function.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `Pattern: initialize max=a, then compare with b and c.
-    - Function returns single computed value, making main concise.
-    - Alternative you can mention: nested ternary for same logic.
-    - Exam tip: include equal-values case statement in explanation.`,
+      notes: `**Temp-max pattern: assume a is largest, then update if b or c beats it**
+
+\`\`\`c
+int largestOfThree(int a, int b, int c) {
+    int max = a;           // assume a is largest
+    if(b > max) max = b;   // update if b wins
+    if(c > max) max = c;   // update if c wins
+    return max;
+}
+\`\`\`
+
+**Why this beats nested ternary:** Readable, clearly handles all 6 orderings of a, b, c.
+
+**Compact ternary alternative (for exam brevity):**
+\`\`\`c
+return (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c);
+\`\`\`
+
+**Equal values:** If a=b=c=5, all comparisons yield the same value — function correctly returns 5 with no issues.
+
+**Function design note:** Return type \`int\` matches parameter types. For float inputs, change all \`int\` to \`float\`.`,
       blocks: [
         {
           type: "code",
@@ -276,10 +413,33 @@ int main() {
       title: "Write a program using function to reverse the given number.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `Reverse logic uses digit extraction loop.
-    - Steps: lastDigit=n%10, rev=rev*10+lastDigit, n=n/10.
-    - Mnemonic: EBS = Extract, Build, Shrink.
-    - Exam tip: store original number if you also need palindrome check variant.`,
+      notes: `**Digit reversal — mnemonic EBS = Extract, Build, Shrink**
+1. \`digit = n % 10\` → extract last digit
+2. \`rev = rev*10 + digit\` → build reversed number
+3. \`n /= 10\` → shrink original
+
+\`\`\`c
+int reverseNumber(int n) {
+    int rev = 0;
+    while(n != 0) {
+        rev = rev * 10 + n % 10;  // build
+        n /= 10;                   // shrink
+    }
+    return rev;
+}
+\`\`\`
+
+**Trace for n = 1234:**
+| n | n%10 | rev |
+|---|------|-----|
+| 1234 | 4 | 4 |
+| 123 | 3 | 43 |
+| 12 | 2 | 432 |
+| 1 | 1 | 4321 |
+
+**Palindrome shortcut:** If \`reverseNumber(n) == n\`, the number is a palindrome! Reuse this function.
+
+**Trailing zero loss:** Input 1200 → reversed = 21 (not 0021) because leading zeros are dropped. Mention this edge case if asked.`,
       blocks: [
         {
           type: "code",
@@ -312,10 +472,35 @@ int main() {
       title: "Write a program using function to find the sum of first n natural numbers.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `Two valid methods: loop summation or formula n(n+1)/2.
-    - Formula is O(1), loop is O(n).
-    - In function-based question, formula gives short and elegant answer.
-    - Exam tip: for very large n, mention possible integer overflow briefly.`,
+      notes: `**Two valid methods — show BOTH for maximum marks**
+
+**Formula O(1) — instant, elegant:**
+\`\`\`c
+int sumNatural(int n) {
+    return n * (n + 1) / 2;  // Gauss formula
+}
+\`\`\`
+
+**Loop O(n) — shows step-by-step understanding:**
+\`\`\`c
+int sumNatural(int n) {
+    int sum = 0, i;
+    for(i = 1; i <= n; i++) sum += i;
+    return sum;
+}
+\`\`\`
+
+**Famous verification:** For n=100, sum = **5050** (Carl Friedrich Gauss computed this as a child!).
+
+| n | Sum |
+|---|-----|
+| 5 | 15 |
+| 10 | 55 |
+| 100 | 5050 |
+
+**Overflow note:** For very large n, \`n*(n+1)\` may exceed \`int\` range. Use \`long long\` in that case.
+
+**Exam tip:** Mention formula is O(1) complexity vs loop O(n) — examiners reward efficiency analysis.`,
       blocks: [
         {
           type: "code",
@@ -343,10 +528,31 @@ int main() {
       title: "Write a program to count the number of digits, alphabets, and special characters in an input string.",
       source: "Question Bank - Module 3",
       marks: 5,
-      notes: `Category checks become easy with ctype.h: isalpha, isdigit.
-    - Logic chain: alphabet -> digit -> else special (excluding spaces/newline if needed).
-    - Input tip: fgets is safer than gets/scanf for full-line strings.
-    - Exam tip: mention casting to unsigned char in ctype calls as good practice.`,
+      notes: `**Three-category classifier using \`<ctype.h>\` functions — cleaner than manual ASCII checks**
+
+| Test | Function | Matches |
+|------|----------|---------|
+| Letter | \`isalpha(c)\` | a-z, A-Z |
+| Digit | \`isdigit(c)\` | 0-9 |
+| Special | else (not alpha, digit, space, newline) | !@#$ etc. |
+
+**Key ctype.h functions to know:**
+\`\`\`c
+isalpha(ch)   // Is it a letter?
+isdigit(ch)   // Is it a digit (0-9)?
+isspace(ch)   // Is it whitespace (space, tab, newline)?
+isupper(ch)   // Is it uppercase?
+islower(ch)   // Is it lowercase?
+\`\`\`
+
+**Input with fgets (safer than gets/scanf for strings):**
+\`\`\`c
+fgets(str, sizeof(str), stdin);  // reads entire line safely
+\`\`\`
+
+**Cast trick:** \`isalpha((unsigned char)str[i])\` — cast to \`unsigned char\` prevents issues with chars having negative values on some systems.
+
+**Exam answer:** Clearly define what counts as "special" (not alpha, not digit, not whitespace) — being explicit shows mastery.`,
       blocks: [
         {
           type: "code",

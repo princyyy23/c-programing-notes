@@ -28,9 +28,9 @@ export const co1: CourseOutcome = {
           title: "Flowchart – Largest of Three Numbers",
           content: `graph TD
     S([Start]) --> IN[/Read A, B, C/]
-    IN --> D1{Is A > B?}
-    D1 -->|Yes| D2{Is A > C?}
-    D1 -->|No| D3{Is B > C?}
+    IN --> D1{"Is A > B?"}
+    D1 -->|Yes| D2{"Is A > C?"}
+    D1 -->|No| D3{"Is B > C?"}
     D2 -->|Yes| RA[/Print A is Largest/]
     D2 -->|No| RC1[/Print C is Largest/]
     D3 -->|Yes| RB[/Print B is Largest/]
@@ -185,7 +185,7 @@ int main() {
           content: `graph TD
     S([Start]) --> IN[/Read n/]
     IN --> INIT["Set a = 0, b = 1, i = 1"]
-    INIT --> CHECK{Is i <= n?}
+    INIT --> CHECK{"Is i <= n?"}
     CHECK -->|Yes| PRINT[/Print a/]
     PRINT --> CALC["c = a + b"]
     CALC --> SHIFT["a = b, b = c"]
@@ -242,7 +242,7 @@ int main() {
           content: `graph TD
     S([Start]) --> IN[/Read N/]
     IN --> CALC["R = N mod 2"]
-    CALC --> CHECK{R == 0?}
+    CALC --> CHECK{"R == 0?"}
     CHECK -->|Yes| EVEN[/Print N is Even/]
     CHECK -->|No| ODD[/Print N is Odd/]
     EVEN --> E([End])
@@ -451,7 +451,7 @@ The largest number is: 45
           content: `graph TD
     S([Start]) --> INPUT[/Read N/]
     INPUT --> PROCESS["R = N % 2"]
-    PROCESS --> DECISION{R == 0?}
+    PROCESS --> DECISION{"R == 0?"}
     DECISION -->|Yes| EVEN[/Display N is EVEN/]
     DECISION -->|No| ODD[/Display N is ODD/]
     EVEN --> STOP([End])
@@ -526,11 +526,11 @@ The largest number is: 45
           title: "Flowchart -- Leap Year Check",
           content: `graph TD
     S([Start]) --> IN[/Read Year/]
-    IN --> C1{Year % 400 == 0?}
+    IN --> C1{"Year % 400 == 0?"}
     C1 -->|Yes| LEAP[/Print Leap Year/]
-    C1 -->|No| C2{Year % 100 == 0?}
+    C1 -->|No| C2{"Year % 100 == 0?"}
     C2 -->|Yes| NOTLEAP[/Print Not a Leap Year/]
-    C2 -->|No| C3{Year % 4 == 0?}
+    C2 -->|No| C3{"Year % 4 == 0?"}
     C3 -->|Yes| LEAP2[/Print Leap Year/]
     C3 -->|No| NOTLEAP2[/Print Not a Leap Year/]
     LEAP --> E([End])
@@ -736,7 +736,7 @@ Largest = 7
           content: `graph TD
     S([Start]) --> IN[/Read marks/]
     IN --> C1{"marks >= 90?"}
-    C1 -->|Yes| G1[Grade = A+]
+    C1 -->|Yes| G1["Grade = A+"]
     C1 -->|No| C2{"marks >= 80?"}
     C2 -->|Yes| G2[Grade = A]
     C2 -->|No| C3{"marks >= 70?"}
@@ -747,7 +747,7 @@ Largest = 7
     C5 -->|Yes| G5[Grade = D]
     C5 -->|No| C6{"marks >= 40?"}
     C6 -->|Yes| G6[Grade = E]
-    C6 -->|No| G7[Grade = F - Fail]
+    C6 -->|No| G7["Grade = F - Fail"]
     G1 --> OUT[/Print Grade/]
     G2 --> OUT
     G3 --> OUT

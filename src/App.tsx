@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react"
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom"
 import { ThemeProvider } from "@/context/ThemeContext"
+import { ProgressProvider } from "@/context/ProgressContext"
 import { Layout } from "@/components/layout/Layout"
 import { courseOutcomes } from "@/data"
 
@@ -68,9 +69,11 @@ function AppInner() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <AppInner />
-    </ThemeProvider>
+    <ProgressProvider>
+      <ThemeProvider>
+        <AppInner />
+      </ThemeProvider>
+    </ProgressProvider>
   )
 }
 

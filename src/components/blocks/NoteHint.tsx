@@ -9,7 +9,7 @@ interface NoteHintProps {
 }
 
 export function NoteHint({ notes, className }: NoteHintProps) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
 
   return (
     <div className={cn("mt-3 rounded-lg overflow-hidden border border-amber-200/70 dark:border-amber-800/40", className)}>

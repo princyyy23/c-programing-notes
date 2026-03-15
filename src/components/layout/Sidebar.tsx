@@ -14,6 +14,7 @@ import {
 } from "@tabler/icons-react"
 import { useState } from "react"
 import { useTheme } from "@/context/ThemeContext"
+import { useProgress } from "@/context/ProgressContext"
 
 const iconMap: Record<string, React.ReactNode> = {
   GitBranch: <IconCodeAsterisk size={16} stroke={1.6} />,
@@ -43,6 +44,13 @@ const countColorMap: Record<string, string> = {
   rose: "text-rose-600/70 dark:text-rose-400/70",
 }
 
+const miniBarColorMap: Record<string, string> = {
+  violet: "bg-violet-500",
+  cyan: "bg-cyan-500",
+  emerald: "bg-emerald-500",
+  rose: "bg-rose-500",
+}
+
 interface SidebarProps {
   courseOutcomes: CourseOutcome[]
   activeCO: string
@@ -53,22 +61,33 @@ function QuestionBankTab({
   co,
   isActive,
   onClick,
+  done,
+  total,
 }: {
   co: CourseOutcome
   isActive: boolean
   onClick: () => void
+  done: number
+  total: number
 }) {
   return (
     <button
       onClick={onClick}
       className={cn(
-        "h-9 rounded-[6px] text-[12px] font-semibold border transition-colors cursor-pointer",
+        "h-9 rounded-[6px] text-[12px] font-semibold border transition-colors cursor-pointer relative overflow-hidden",
         isActive
           ? sidebarColorMap[co.color] || "bg-primary/10 text-primary border-primary/30"
           : "bg-card/60 text-muted-foreground border-sidebar-border hover:bg-sidebar-accent hover:text-sidebar-foreground"
       )}
     >
       {co.shortTitle}
+      {/* Micro progress bar at bottom of tab */}
+      {done > 0 && (
+        <span
+          className={cn("absolute bottom-0 left-0 h-[2px] rounded-full", miniBarColorMap[co.color] || "bg-primary")}
+          style={{ width: `${Math.round((done / total) * 100)}%` }}
+        />
+      )}
     </button>
   )
 }
@@ -77,11 +96,17 @@ function NavItem({
   co,
   isActive,
   onClick,
+  done,
+  total,
 }: {
   co: CourseOutcome
   isActive: boolean
   onClick: () => void
+  done: number
+  total: number
 }) {
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0
+
   return (
     <button
       onClick={onClick}
@@ -103,12 +128,22 @@ function NavItem({
         {iconMap[co.icon] || <IconBook2 size={16} stroke={1.6} />}
       </span>
       <span className="flex-1 text-[13px] font-medium truncate">{co.shortTitle}</span>
-      <span className={cn(
-        "flex-shrink-0 text-[11px] font-semibold tabular-nums",
-        isActive ? countColorMap[co.color] : "text-muted-foreground/50"
-      )}>
-        {co.questions.length}
-      </span>
+      <div className="flex-shrink-0 flex items-center gap-1.5">
+        {done > 0 && (
+          <span className={cn(
+            "text-[10px] font-semibold tabular-nums",
+            isActive ? countColorMap[co.color] : "text-muted-foreground/40"
+          )}>
+            {pct}%
+          </span>
+        )}
+        <span className={cn(
+          "text-[11px] font-semibold tabular-nums",
+          isActive ? countColorMap[co.color] : "text-muted-foreground/50"
+        )}>
+          {co.questions.length}
+        </span>
+      </div>
     </button>
   )
 }
@@ -116,8 +151,10 @@ function NavItem({
 export function Sidebar({ courseOutcomes, activeCO, onSelectCO }: SidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { isDark, toggle } = useTheme()
+  const { getProgress } = useProgress()
 
   const total = courseOutcomes.reduce((sum, co) => sum + co.questions.length, 0)
+  const totalDone = courseOutcomes.reduce((sum, co) => sum + getProgress(co).done, 0)
   const questionBankCOs = courseOutcomes.filter(co => co.id.startsWith("qb-"))
   const examCOs = courseOutcomes.filter(co => co.id !== "sir" && !co.id.startsWith("qb-"))
   const refCOs = courseOutcomes.filter(co => co.id === "sir")
@@ -143,14 +180,19 @@ export function Sidebar({ courseOutcomes, activeCO, onSelectCO }: SidebarProps) 
           Exam Questions
         </p>
         <div className="space-y-0.5 mb-4">
-          {examCOs.map(co => (
-            <NavItem
-              key={co.id}
-              co={co}
-              isActive={activeCO === co.id}
-              onClick={() => { onSelectCO(co.id); setMobileOpen(false) }}
-            />
-          ))}
+          {examCOs.map(co => {
+            const p = getProgress(co)
+            return (
+              <NavItem
+                key={co.id}
+                co={co}
+                isActive={activeCO === co.id}
+                onClick={() => { onSelectCO(co.id); setMobileOpen(false) }}
+                done={p.done}
+                total={p.total}
+              />
+            )
+          })}
         </div>
 
         {questionBankCOs.length > 0 && (
@@ -160,14 +202,19 @@ export function Sidebar({ courseOutcomes, activeCO, onSelectCO }: SidebarProps) 
               Question Bank
             </p>
             <div className="grid grid-cols-3 gap-1.5 mb-4 px-0.5">
-              {questionBankCOs.map(co => (
-                <QuestionBankTab
-                  key={co.id}
-                  co={co}
-                  isActive={activeCO === co.id}
-                  onClick={() => { onSelectCO(co.id); setMobileOpen(false) }}
-                />
-              ))}
+              {questionBankCOs.map(co => {
+                const p = getProgress(co)
+                return (
+                  <QuestionBankTab
+                    key={co.id}
+                    co={co}
+                    isActive={activeCO === co.id}
+                    onClick={() => { onSelectCO(co.id); setMobileOpen(false) }}
+                    done={p.done}
+                    total={p.total}
+                  />
+                )
+              })}
             </div>
           </>
         )}
@@ -179,14 +226,19 @@ export function Sidebar({ courseOutcomes, activeCO, onSelectCO }: SidebarProps) 
               Reference
             </p>
             <div className="space-y-0.5">
-              {refCOs.map(co => (
-                <NavItem
-                  key={co.id}
-                  co={co}
-                  isActive={activeCO === co.id}
-                  onClick={() => { onSelectCO(co.id); setMobileOpen(false) }}
-                />
-              ))}
+              {refCOs.map(co => {
+                const p = getProgress(co)
+                return (
+                  <NavItem
+                    key={co.id}
+                    co={co}
+                    isActive={activeCO === co.id}
+                    onClick={() => { onSelectCO(co.id); setMobileOpen(false) }}
+                    done={p.done}
+                    total={p.total}
+                  />
+                )
+              })}
             </div>
           </>
         )}
@@ -195,7 +247,8 @@ export function Sidebar({ courseOutcomes, activeCO, onSelectCO }: SidebarProps) 
       {/* Footer */}
       <div className="flex-shrink-0 px-4 h-12 border-t border-sidebar-border flex items-center justify-between">
         <span className="text-[12px] text-muted-foreground">
-          <span className="font-semibold text-foreground">{total}</span> questions
+          <span className="font-semibold text-foreground">{totalDone > 0 ? `${totalDone}/` : ""}{total}</span>{" "}
+          {totalDone > 0 ? "reviewed" : "questions"}
         </span>
         <button
           onClick={toggle}

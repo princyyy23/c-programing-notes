@@ -1470,7 +1470,12 @@ Space Complexity: O(log n) for recursion stack
     E --> H["[07]<br/>Left of 08"]
     E --> I["08<br/>(in place)"]
 
-    J["Sorted: 01, 05, 07, 08, 09, 10"]
+    B -.-> J["Sorted: 01, 05, 07, 08, 09, 10"]
+    C -.-> J
+    H -.-> J
+    I -.-> J
+    F -.-> J
+    G -.-> J
 
     style A fill:#10b981,stroke:#059669,color:#fff
     style B fill:#6366f1,stroke:#4f46e5,color:#fff

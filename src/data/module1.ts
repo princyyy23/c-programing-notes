@@ -13,10 +13,28 @@ export const module1: CourseOutcome = {
       title: "Draw flowchart for sum and average of 10 numbers.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Memory trick: SIA = Sum, Increment, Average.
-    - Code flow: initialize sum=0 and i=1, repeat 10 times, then average = sum/10.0 (use 10.0 for decimal result).
-    - Common mistake: using integer division gives truncated average.
-    - Exam tip: write one sample input set and show final sum + avg in 1 line.`,
+      notes: `**Mnemonic: SIA = Sum, Increment, Average**
+
+**Core loop pattern:**
+\`\`\`c
+sum = 0;
+for(i = 1; i <= 10; i++) {
+    scanf("%d", &num);
+    sum += num;
+}
+avg = sum / 10.0;  // 10.0 forces float division!
+\`\`\`
+
+**Why 10.0 not 10?** Integer division truncates: 27/10 = 2 (wrong). 27/10.0 = 2.7 ✓
+
+**Flowchart checklist (draw in this order):**
+1. Oval → Init sum=0, i=1
+2. Diamond: i <= 10? (Yes → body, No → exit)
+3. Parallelogram: Read num
+4. Rectangle: sum = sum + num; i = i + 1 → back to diamond
+5. Rectangle: avg = sum / 10.0 then Parallelogram: Print sum, avg
+
+**Exam tip:** Trace one iteration (i=1, num=5 → sum=5) inside the flowchart answer to show the logic is correct.`,
       blocks: [
         {
           type: "text",
@@ -28,12 +46,12 @@ export const module1: CourseOutcome = {
           title: "Flowchart - Sum and Average of 10 Numbers",
           content: `graph TD
 S([Start]) --> A[sum=0, i=1]
-A --> B{Is i <= 10?}
+A --> B{"Is i <= 10?"}
 B -->|Yes| C[/Read num/]
-C --> D[sum = sum + num]
-D --> E[i = i + 1]
+C --> D["sum = sum + num"]
+D --> E["i = i + 1"]
 E --> B
-B -->|No| F[avg = sum / 10.0]
+B -->|No| F["avg = sum / 10.0"]
 F --> G[/Print sum and avg/]
 G --> H([End])`,
         },
@@ -44,10 +62,22 @@ G --> H([End])`,
       title: "Draw flowchart for quadratic equation to find all possible roots.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Mnemonic: DDR = Distinct, Duplicate, (complex) Root pair.
-    - Core variable is discriminant D = b*b - 4*a*c.
-    - Branch logic: D>0 two real roots, D=0 equal roots, D<0 complex roots.
-    - Code tip: always mention a != 0, otherwise equation is not quadratic.`,
+      notes: `**Mnemonic: DDC = Discriminant Decides Case** (D>0 Distinct, D=0 Double, D<0 Complex)
+
+**Three root cases by D = b²−4ac:**
+| D value | Root type | Formula |
+|---------|-----------|---------|
+| D > 0 | Two distinct real roots | (−b ± √D) / (2a) |
+| D = 0 | Two equal (repeated) roots | −b / (2a) |
+| D < 0 | Complex (imaginary) roots | real ± imag·i |
+
+**Complex root parts:** real = −b/(2a), imaginary = √(−D)/(2a)
+
+**Critical operator-precedence trap:** Write \`(-b + sqrt(D)) / (2*a)\` — without outer brackets, \`/2*a\` divides first then multiplies (wrong!). Requires \`#include <math.h>\`.
+
+**Quick verify:** For x²−5x+6=0 → D=25−24=1>0 → roots: (5±1)/2 = **3** and **2** ✓
+
+**Never forget:** Check a ≠ 0 first — if a=0 it is a linear equation, not quadratic.`,
       blocks: [
         {
           type: "text",
@@ -58,16 +88,16 @@ G --> H([End])`,
           type: "diagram",
           title: "Flowchart - Quadratic Roots",
           content: `graph TD
-S([Start]) --> I[/Read a,b,c/]
-I --> D[D = b*b - 4*a*c]
-D --> C1{D > 0?}
-C1 -->|Yes| R1[x1=(-b+sqrt(D))/(2a)\nx2=(-b-sqrt(D))/(2a)]
-R1 --> P1[/Print two distinct real roots/]
-C1 -->|No| C2{D == 0?}
-C2 -->|Yes| R2[x = -b/(2a)]
-R2 --> P2[/Print equal roots/]
-C2 -->|No| R3[real=-b/(2a)\nimag=sqrt(-D)/(2a)]
-R3 --> P3[/Print complex roots real±imag i/]
+S([Start]) --> I[/Read a, b, c/]
+I --> D["Compute D = b*b - 4*a*c"]
+D --> C1{"D > 0?"}
+C1 -->|Yes| R1["x1 = -b+sqrtD / 2a, x2 = -b-sqrtD / 2a"]
+R1 --> P1[/Print x1 and x2 as two distinct real roots/]
+C1 -->|No| C2{"D == 0?"}
+C2 -->|Yes| R2["x = -b / 2a"]
+R2 --> P2[/Print x as two equal real roots/]
+C2 -->|No| R3["real = -b/2a, imag = sqrtNegD / 2a"]
+R3 --> P3[/Print complex roots: real+imag*i and real-imag*i/]
 P1 --> E([End])
 P2 --> E
 P3 --> E`,
@@ -79,21 +109,34 @@ P3 --> E`,
       title: "Draw flowchart to find whether entered year is leap year or not.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Best mnemonic: 4 Divides, 100 Denies, 400 Overrides.
-    - Decision order in code: check 400 first, then 100, then 4.
-    - If order is changed, years like 2000/1900 can give wrong output.
-    - Exam tip: quote examples: 2000 leap, 1900 not leap, 2024 leap.`,
+      notes: `**Mnemonic: "4 Divides, 100 Denies, 400 Qualifies"**
+
+**Decision order (ORDER MATTERS — check 400 first!):**
+1. If year % 400 == 0 → **Leap Year** ✓
+2. Else if year % 100 == 0 → **Not Leap Year** ✗
+3. Else if year % 4 == 0 → **Leap Year** ✓
+4. Else → **Not Leap Year** ✗
+
+**Real examples to memorise:**
+| Year | Test | Result |
+|------|------|--------|
+| 2000 | ÷400 ✓ | Leap year |
+| 1900 | ÷100, not ÷400 | NOT leap year |
+| 2024 | ÷4, not ÷100 | Leap year |
+| 2023 | None | NOT leap year |
+
+**Flowchart trap:** If you check 100 before 400, year 2000 (divisible by both) gets flagged "Not Leap" incorrectly. Always: 400 → 100 → 4.`,
       blocks: [
         {
           type: "diagram",
           title: "Flowchart - Leap Year",
           content: `graph TD
 S([Start]) --> I[/Read year/]
-I --> A{year % 400 == 0?}
+I --> A{"year % 400 == 0?"}
 A -->|Yes| L[/Print Leap Year/]
-A -->|No| B{year % 100 == 0?}
+A -->|No| B{"year % 100 == 0?"}
 B -->|Yes| N[/Print Not Leap Year/]
-B -->|No| C{year % 4 == 0?}
+B -->|No| C{"year % 4 == 0?"}
 C -->|Yes| L
 C -->|No| N
 L --> E([End])
@@ -106,19 +149,36 @@ N --> E`,
       title: "Draw flowchart to find smallest of three numbers.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Quick approach: keep a temporary minimum and update it.
-    - Nested decision version: compare a and b first, then compare winner with c.
-    - Code trick: min = (a<b)?a:b; then min = (min<c)?min:c.
-    - Exam tip: mention all equal case (a=b=c) is still valid.`,
+      notes: `**Visual trick: "Eliminate the largest — keep the smallest"**
+
+**Two-step nested logic (mirror of "Largest of Three"):**
+- Compare a and b → keep the smaller as temp winner
+- Compare temp winner with c → final minimum
+
+**Ternary shortcut:**
+\`\`\`c
+min = (a < b) ? a : b;
+min = (min < c) ? min : c;
+\`\`\`
+
+**Flowchart has 4 leaf paths:**
+- a<b AND a<c → print a
+- a<b AND a≥c → print c
+- a≥b AND b<c → print b
+- a≥b AND b≥c → print c
+
+**Equal values:** If a=b=c=5, all comparisons give the same value — any output is correct. Mention this.
+
+**Common mistake:** Chaining \`a < b < c\` — NOT valid in C! Must use \`&&\`: \`(a<b && a<c)\`.`,
       blocks: [
         {
           type: "diagram",
           title: "Flowchart - Smallest of Three",
           content: `graph TD
 S([Start]) --> I[/Read a,b,c/]
-I --> A{a < b?}
-A -->|Yes| B{a < c?}
-A -->|No| C{b < c?}
+I --> A{"a < b?"}
+A -->|Yes| B{"a < c?"}
+A -->|No| C{"b < c?"}
 B -->|Yes| P1[/Print a is smallest/]
 B -->|No| P2[/Print c is smallest/]
 C -->|Yes| P3[/Print b is smallest/]
@@ -134,10 +194,25 @@ P3 --> E`,
       title: "Explain logical operators with example.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Mnemonic: AON = AND, OR, NOT.
-    - AND needs both true, OR needs at least one true, NOT flips true/false.
-    - Very important: short-circuiting (right side may not execute).
-    - Code tip: explain with one truth-table style line for each operator.`,
+      notes: `**Mnemonic: AON = AND needs both, OR needs one, NOT flips**
+
+| Operator | Symbol | True when | Example |
+|----------|--------|-----------|---------|
+| Logical AND | \`&&\` | BOTH operands true | \`(a>0 && b>0)\` |
+| Logical OR | \`\|\|\` | AT LEAST ONE true | \`(a>0 \|\| b>0)\` |
+| Logical NOT | \`!\` | operand is false | \`!(a==0)\` |
+
+**Short-circuit evaluation (very examinable!):**
+- \`&&\`: if left is **false** → right side is NEVER evaluated
+- \`\|\|\`: if left is **true** → right side is NEVER evaluated
+\`\`\`c
+int x = 0;
+if (x != 0 && 10/x > 1) { ... }  // safe! 10/x skipped when x=0
+\`\`\`
+
+**Return values:** logical operators return **1** (true) or **0** (false). \`printf("%d", 5 > 3);\` prints 1.
+
+**Exam tip:** Always include a one-line truth-table row or concrete example value per operator.`,
       blocks: [
         {
           type: "text",
@@ -151,10 +226,25 @@ P3 --> E`,
       title: "Define algorithm and its properties.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Mnemonic for properties: IODEF = Input, Output, Definiteness, Effectiveness, Finiteness.
-    - Algorithm is language-independent step-by-step logic.
-    - Strong answer format: definition -> properties -> tiny 3-step example.
-    - Exam tip: write numbered steps, not paragraph-only text.`,
+      notes: `**Definition: A finite, unambiguous, step-by-step sequence of instructions to solve a problem.**
+
+**5 essential properties — mnemonic FIDOE:**
+- **F**initeness: must end after a finite number of steps
+- **I**nput: accepts zero or more inputs
+- **D**efiniteness: each step is precise and unambiguous
+- **O**utput: produces at least one output
+- **E**ffectiveness: every step is basic and executable
+
+**Algorithm writing format for exams:**
+1. Start
+2. Read / Input data
+3. Process (calculation/logic)
+4. Output / Print result
+5. Stop
+
+**Why algorithm before code?** It is language-independent — same algorithm can be coded in C, Java, or Python without changes.
+
+**Exam tip:** Write numbered English/pseudo steps, then draw the flowchart — both together earn full marks. Paragraph-only answers lose marks.`,
       blocks: [
         {
           type: "text",
@@ -168,10 +258,24 @@ P3 --> E`,
       title: "What is header file? Explain with example.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Think of header as interface, source file as implementation.
-    - Standard headers use <...>, user headers use "...".
-    - Code understanding: function is declared in header, defined in .c file.
-    - Exam tip: include 2 examples: stdio.h and math.h.`,
+      notes: `**Analogy: Header file = toolbox. Without it, the compiler doesn't know the tools (functions) exist.**
+
+**Two include syntaxes:**
+- System headers: \`#include <stdio.h>\` (angle brackets → searches system directory)
+- User-defined: \`#include "myfile.h"\` (quotes → searches current directory first)
+
+**Most important standard headers:**
+| Header | Key contents |
+|--------|-------------|
+| \`stdio.h\` | \`printf\`, \`scanf\`, \`fopen\` |
+| \`math.h\` | \`sqrt\`, \`pow\`, \`fabs\` |
+| \`string.h\` | \`strlen\`, \`strcpy\`, \`strcmp\` |
+| \`stdlib.h\` | \`malloc\`, \`free\`, \`exit\` |
+| \`ctype.h\` | \`isalpha\`, \`isdigit\`, \`toupper\` |
+
+**What headers contain:** Function declarations, macros, type definitions — NOT executable code.
+
+**Common trap:** Forgetting \`#include <math.h>\` when using \`sqrt()\` causes a linker error. Also needs \`-lm\` compile flag.`,
       blocks: [
         {
           type: "text",
@@ -198,10 +302,26 @@ int main() {
       title: "What is precedence and associativity of operators? Draw the table.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Mnemonic: Precedence = Priority, Associativity = Path.
-    - Evaluate high-priority operators first, then same-level by associativity.
-    - Assignment and unary are mostly right-to-left; arithmetic mostly left-to-right.
-    - Code tip: add parentheses in answers to show explicit evaluation order.`,
+      notes: `**Mnemonic: UMARLA = Unary → Multiplicative → Additive → Relational → Logical → Assignment**
+
+**Precedence = priority (high → evaluated first). Associativity = direction when equal priority.**
+
+**Quick reference (high → low):**
+| Level | Operators | Associativity |
+|-------|-----------|---------------|
+| Highest | \`()\`, \`[]\` | Left → Right |
+| Unary | \`++\`, \`--\`, \`!\`, \`~\`, unary \`+/-\` | **Right → Left** |
+| Multiplicative | \`*\`, \`/\`, \`%\` | Left → Right |
+| Additive | \`+\`, \`-\` | Left → Right |
+| Relational | \`<\`, \`>\`, \`<=\`, \`>=\` | Left → Right |
+| Equality | \`==\`, \`!=\` | Left → Right |
+| Logical \`&&\` / \`\|\|\` | \`&&\`, \`\|\|\` | Left → Right |
+| Ternary | \`?:\` | **Right → Left** |
+| Assignment | \`=\`, \`+=\`, \`-=\` | **Right → Left** |
+
+**Tricky expression:** \`x = 2 + 3 * 4\` → \`*\` before \`+\` → x = 2 + 12 = **14** (NOT 20!)
+
+**Exam tip:** Add explicit parentheses in output-tracing answers to show which operator evaluates first.`,
       blocks: [
         {
           type: "text",
@@ -215,10 +335,21 @@ int main() {
       title: "Explain different data types in C.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Exam frame: 4 buckets -> Basic, Derived, User-defined, Void.
-    - Basic stores direct values, derived builds from basic (array/pointer/function).
-    - User-defined gives custom grouped types (struct/union/enum/typedef).
-    - Tip: add one example variable per category for full-mark clarity.`,
+      notes: `**4 type categories — mnemonic BDUV:**
+- **B**asic: \`int\`, \`char\`, \`float\`, \`double\`
+- **D**erived: arrays, pointers, functions
+- **U**ser-defined: struct, union, enum, typedef
+- **V**oid: no type (functions returning nothing, generic pointers)
+
+**Basic type sizes (must memorise):**
+| Type | Size | Format | Range summary |
+|------|------|--------|---------------|
+| \`char\` | 1 byte | \`%c\` | −128 to 127 |
+| \`int\` | 4 bytes | \`%d\` | ~−2B to +2B |
+| \`float\` | 4 bytes | \`%f\` | 6–7 decimal digits |
+| \`double\` | 8 bytes | \`%lf\` | 15–16 decimal digits |
+
+**Exam trap:** "Derived" and "User-defined" are separate categories — don't merge them. Give one example per category to guarantee full marks.`,
       blocks: [
         {
           type: "text",
@@ -232,10 +363,23 @@ int main() {
       title: "Explain primitive data types in C.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Mnemonic: CIFDV = char, int, float, double, void.
-    - Code understanding: choose type by range + precision requirement.
-    - float is less precise than double; mention this explicitly.
-    - Exam tip: add typical byte size table (platform dependent wording).`,
+      notes: `**Mnemonic: CIFDV = Char, Int, Float, Double, Void**
+
+**Size memory aid:** \`char(1) < short(2) < int(4) = float(4) < double(8) < long long(8)\`
+
+**Key facts per type:**
+- \`char\` — stores ASCII value internally; \`'A'\`=65, \`'a'\`=97
+- \`int\` — most common, default for whole numbers
+- \`float\` — use \`f\` suffix: \`3.14f\`, printed with \`%f\`
+- \`double\` — higher precision, printed with \`%lf\`
+- \`void\` — used for functions returning nothing: \`void main()\`
+
+**Modifiers extend the basic types:**
+- \`unsigned int\`: doubles positive range (0 to ~4.29B) using same 4 bytes
+- \`long long\`: 8 bytes, range up to ~9.2 × 10¹⁸
+- \`short int\`: 2 bytes, range −32768 to 32767
+
+**Precision tip:** Prefer \`double\` over \`float\` for decimal calculations — more accurate, same code.`,
       blocks: [
         {
           type: "text",
@@ -249,10 +393,23 @@ int main() {
       title: "State any two library functions in math along with example.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Most asked pair: sqrt() and pow().
-    - Mention required header math.h and that arguments/returns are floating type.
-    - Code trick: for integer cube, n*n*n is often preferred to pow(n,3).
-    - Exam tip: always show sample output with 1 input value.`,
+      notes: `**Most tested pair: \`sqrt()\` and \`pow()\`** — always add \`#include <math.h>\`
+
+All math functions return \`double\`.
+
+| Function | Purpose | Example | Result |
+|----------|---------|---------|--------|
+| \`sqrt(x)\` | Square root | \`sqrt(49.0)\` | 7.0 |
+| \`pow(x,y)\` | x to power y | \`pow(2,10)\` | 1024.0 |
+| \`fabs(x)\` | Absolute value | \`fabs(-3.5)\` | 3.5 |
+| \`ceil(x)\` | Round UP | \`ceil(2.3)\` | 3.0 |
+| \`floor(x)\` | Round DOWN | \`floor(2.9)\` | 2.0 |
+
+**Format specifier:** Use \`%f\` or \`%.2f\` to print double results from math functions.
+
+**Integer cube trick:** Use \`i*i*i\` instead of \`pow(i,3)\` — avoids floating-point rounding, no header needed.
+
+**Linker flag:** Compile with \`gcc file.c -lm\` — the \`-lm\` links the math library. Forgetting causes "undefined reference" error!`,
       blocks: [
         {
           type: "text",
@@ -280,10 +437,24 @@ int main() {
       title: "Explain various bitwise operators.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Memory aid: BEDNSL = Bitwise AND, OR, XOR, NOT, Shift Left, Shift Right.
-    - Explain each using binary form (e.g., 5=0101, 3=0011).
-    - Left shift roughly multiplies by 2^k, right shift roughly divides by 2^k.
-    - Exam tip: show one binary worked example; it scores better than plain definition.`,
+      notes: `**Mnemonic: BEDNSL = Bitwise AND, OR, XOR, NOT, Shift-Left, Shift-Right**
+
+**Think of bits as light switches (0=OFF, 1=ON):**
+- \`&\` AND → BOTH must be ON: \`0101 & 0011 = 0001\` = **1**
+- \`|\` OR → EITHER must be ON: \`0101 | 0011 = 0111\` = **7**
+- \`^\` XOR → DIFFERENT means ON: \`0101 ^ 0011 = 0110\` = **6**
+- \`~\` NOT → FLIP every bit: \`~5 = -6\` (two's complement)
+- \`<<\` Left shift = multiply by 2ⁿ: \`5 << 1 = 10\`, \`5 << 2 = 20\`
+- \`>>\` Right shift = divide by 2ⁿ: \`20 >> 1 = 10\`, \`20 >> 2 = 5\`
+
+**Binary trace (a=5=0101, b=3=0011):**
+| Op | Binary | Decimal |
+|----|--------|---------|
+| \`a & b\` | 0101 & 0011 = 0001 | **1** |
+| \`a \| b\` | 0101 \| 0011 = 0111 | **7** |
+| \`a ^ b\` | 0101 ^ 0011 = 0110 | **6** |
+
+**Exam tip:** Always show binary representation in your worked example — scores far better than plain text definitions.`,
       blocks: [
         {
           type: "text",
@@ -297,10 +468,26 @@ int main() {
       title: "Explain ternary operator and develop a program to find largest of three numbers using ternary operator.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Read ternary as: if condition then value1 else value2.
-    - Nested ternary logic should be read from outside to inside.
-    - Code tip: use brackets in nested form for readability in exam.
-    - Trick: write equivalent if-else below ternary to prove understanding.`,
+      notes: `**Read ternary as: "Is this true? YES → give this value, NO → give that value"**
+
+Syntax: \`condition ? value_if_true : value_if_false\`
+
+**Largest of 3 — nested ternary (read OUTSIDE → IN):**
+\`\`\`c
+max = (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c);
+\`\`\`
+- Outer \`?\`: Is a > b? YES → pick winner of {a, c}, NO → pick winner of {b, c}
+- Inner \`?\`: picks the true larger of each group
+
+**Equivalent if-else (write below in exam for explanation credit):**
+\`\`\`c
+if (a > b) { max = (a > c) ? a : c; }
+else       { max = (b > c) ? b : c; }
+\`\`\`
+
+**When to use ternary:** Simple single-expression decisions ✓. Avoid for nested multi-statement logic ✗.
+
+**Key exam fact:** \`?:\` is the ONLY ternary (3-operand) operator in C.`,
       blocks: [
         {
           type: "text",
@@ -331,10 +518,31 @@ int main() {
       title: "Explain structure of C program.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Mnemonic order: CDLGMF = Comments, Directives, Defines, Globals, Main, Functions.
-    - Structure answer should be in sequence, not random bullet points.
-    - In code, execution starts from main even if functions are written below.
-    - Exam tip: draw mini skeleton program after listing sections.`,
+      notes: `**Mnemonic: CDLGMF = Comments, Directives, Defines, Globals, Main, Functions**
+
+**Skeleton every C program follows (in order):**
+\`\`\`c
+/* 1. Documentation / comments */
+#include <stdio.h>       /* 2. Preprocessor directives */
+#define PI 3.14159       /* 3. Macro definitions */
+int globalVar = 0;       /* 4. Global variable declarations */
+
+int main() {             /* 5. main() function */
+    // local declarations
+    // executable statements
+    return 0;
+}
+
+void helper() { ... }    /* 6. User-defined functions */
+\`\`\`
+
+**Execution always begins at \`main()\`** — even if functions are written above it in the file.
+
+**Two subsections inside main:**
+1. Declaration section (variable declarations)
+2. Executable section (statements, loops, function calls)
+
+**Exam tip:** Draw the skeleton template after listing the 6 sections — code + text earns more marks than text alone.`,
       blocks: [
         {
           type: "text",
@@ -348,10 +556,30 @@ int main() {
       title: "Write an algorithm to find entered number is even or odd and write C program for the same.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Core check: n % 2 == 0 means even, else odd.
-    - Algorithm writing pattern: Start -> Input -> Process -> Output -> Stop.
-    - Code tip: keep one clear if-else; avoid unnecessary nested conditions.
-    - Viva tip: also mention bit trick n & 1 for odd/even.`,
+      notes: `**Core test: \`n % 2 == 0\` → even, else → odd**
+
+**Algorithm (exact exam writing format — numbered steps):**
+1. Start
+2. Read number n
+3. Compute R = n % 2
+4. If R == 0, Print "Even"
+5. Else, Print "Odd"
+6. Stop
+
+\`\`\`c
+if (n % 2 == 0)
+    printf("Even");
+else
+    printf("Odd");
+\`\`\`
+
+**Bitwise shortcut (bonus trick):** \`n & 1\` gives 0 for even, 1 for odd — faster but same result.
+
+**Edge case to mention:** 0 is even (0 % 2 = 0).
+
+**Example outputs:** 4 % 2 = 0 → Even | 7 % 2 = 1 → Odd | 0 % 2 = 0 → Even
+
+**Exam tip:** Full marks structure = Algorithm (numbered) + Flowchart + Program. Paragraphs alone lose marks.`,
       blocks: [
         {
           type: "text",
@@ -384,10 +612,25 @@ int main() {
       title: "Explain ternary operator and develop a program to find entered number is positive or negative using ternary operator.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Good ternary answer handles 3 states: positive, negative, zero.
-    - Nested ternary pattern: (n>0)?...:(n<0)?...:...
-    - Code readability tip: if logic becomes long, switch to if-else.
-    - Exam trick: add one test each for +ve, -ve and 0.`,
+      notes: `**Three-state ternary — DON'T forget ZERO! Most students only handle two states.**
+
+**Nested ternary (outer → inner reading):**
+\`\`\`c
+(n > 0) ? printf("Positive") :
+(n < 0) ? printf("Negative") :
+          printf("Zero");
+\`\`\`
+
+**Equivalent readable if-else:**
+\`\`\`c
+if      (n > 0) printf("Positive");
+else if (n < 0) printf("Negative");
+else            printf("Zero");
+\`\`\`
+
+**Test all 3 values in exam:** n=5 → Positive | n=−3 → Negative | n=0 → Zero (shows all branches work).
+
+**Common mistake:** Writing only \`(n > 0) ? "Positive" : "Negative"\` — misses zero! Three states need three branches.`,
       blocks: [
         {
           type: "code",
@@ -411,10 +654,24 @@ int main() {
       title: "Explain keywords, identifier, constants and variable.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Quick memory chain: KICV = Keyword, Identifier, Constant, Variable.
-    - Keyword: reserved; Identifier: user-defined; Constant: fixed; Variable: changeable.
-    - Code tip: compare with one statement like int count = 10; to identify all four.
-    - Exam tip: mention identifier naming rules in one extra line.`,
+      notes: `**Quick memory chain: KICV = Keyword, Identifier, Constant, Variable**
+
+| Term | Definition | Example in \`int count = 10;\` |
+|------|------------|-------------------------------|
+| **Keyword** | Reserved word in C | \`int\` |
+| **Identifier** | User-defined name | \`count\` |
+| **Constant** | Fixed, unchanging value | \`10\` |
+| **Variable** | Named memory location (changeable) | \`count\` (can be reassigned) |
+
+**Identifier naming rules (examinable!):**
+- Must start with letter (a-z, A-Z) or underscore \`_\`
+- Can contain letters, digits (0-9), underscores
+- Case sensitive: \`Count\` ≠ \`count\`
+- Cannot be a C keyword (\`int\`, \`if\` are reserved)
+- Valid: \`myVar\`, \`_count\`, \`num1\`, \`MAX_SIZE\`
+- Invalid: \`1var\` (starts with digit), \`my var\` (space), \`float\` (keyword)
+
+**Exam tip:** Use the same one-liner (\`int count = 10;\`) to identify all four terms — saves time and proves understanding.`,
       blocks: [
         {
           type: "text",
@@ -428,10 +685,23 @@ int main() {
       title: "What do you mean by token? What are different tokens used in C?",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Mnemonic: KICOSS = Keywords, Identifiers, Constants, Operators, Strings, Symbols.
-    - Token = smallest meaningful lexical unit recognized by compiler.
-    - Example breakdown of int a=10; gives excellent marks quickly.
-    - Tip: avoid confusing tokens with statements or lines.`,
+      notes: `**Token = smallest meaningful lexical unit the compiler recognises (like individual words in a sentence)**
+
+**Mnemonic: KICOSS = Keywords, Identifiers, Constants, Operators, String literals, Symbols**
+
+| Token type | Examples |
+|------------|----------|
+| Keywords | \`int\`, \`if\`, \`while\`, \`return\` |
+| Identifiers | \`main\`, \`sum\`, \`myVar\` |
+| Constants | \`100\`, \`3.14\`, \`'A'\` |
+| String literals | \`"hello"\`, \`"C program"\` |
+| Operators | \`+\`, \`-\`, \`*\`, \`=\`, \`==\` |
+| Special symbols | \`{\`, \`}\`, \`;\`, \`,\`, \`(\`, \`)\` |
+
+**Perfect exam breakdown of \`int a = 10;\`:**
+- \`int\` (keyword) · \`a\` (identifier) · \`=\` (operator) · \`10\` (constant) · \`;\` (special symbol)
+
+**Exam tip:** Show the token breakdown of one real line — it demonstrates understanding and fills space neatly.`,
       blocks: [
         {
           type: "text",
@@ -445,10 +715,22 @@ int main() {
       title: "Discuss what is operator? Illustrate different operators used in C.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Operator is action symbol applied on operands.
-    - Best answer format: definition -> category list -> one example per category.
-    - Must include arithmetic, relational, logical, assignment, bitwise, conditional.
-    - Exam tip: differentiate unary (++), binary (+), ternary(?:).`,
+      notes: `**Operator = symbol that tells the compiler to perform an operation on operands**
+
+**6 main categories — mnemonic ARBLSC:**
+- **A**rithmetic: \`+\`, \`-\`, \`*\`, \`/\`, \`%\`
+- **R**elational: \`<\`, \`>\`, \`<=\`, \`>=\`, \`==\`, \`!=\`
+- **B**itwise: \`&\`, \`|\`, \`^\`, \`~\`, \`<<\`, \`>>\`
+- **L**ogical: \`&&\`, \`||\`, \`!\`
+- **S**pecial: \`sizeof\`, \`?:\`, \`,\`, \`&\` (address), \`*\` (dereference)
+- **A**ssignment: \`=\`, \`+=\`, \`-=\`, \`*=\`, \`/=\`, \`%=\`
+
+**Arity (number of operands):**
+- Unary (1 operand): \`++a\`, \`!x\`, \`~b\`
+- Binary (2 operands): \`a + b\`, \`a == b\`
+- Ternary (3 operands): \`a ? b : c\` — the **ONLY** ternary operator in C!
+
+**Exam answer format:** Definition → Category list with symbols → One example per category → Arity explanation.`,
       blocks: [
         {
           type: "text",
@@ -462,10 +744,22 @@ int main() {
       title: "Write algorithm and prepare a flowchart to read 5 subject marks and classify them into grades.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Grade logic mnemonic: D-F-S-P-F (Distinction, First, Second, Pass, Fail).
-    - Always compute average once, then do descending boundary checks.
-    - Descending check avoids overlap mistakes (start from >=75 first).
-    - Code tip: use else-if ladder for mutually exclusive grade ranges.`,
+      notes: `**Grade boundaries mnemonic: D-F-S-P-F = Distinction, First, Second, Pass, Fail**
+
+**ALWAYS check from HIGHEST boundary down (else-if chain):**
+| Boundary | Grade |
+|----------|-------|
+| avg >= 75 | Distinction |
+| avg >= 60 | First Class |
+| avg >= 50 | Second Class |
+| avg >= 40 | Pass Class |
+| avg < 40 | Fail |
+
+**Why descending order?** If you check \`>= 40\` first, a student with 90 would match "Pass" and stop (wrong!). Top-down → first match wins correctly.
+
+**Average trap:** Use \`(m1+m2+m3+m4+m5) / 5.0\` (float \`5.0\`), not \`/ 5\` (integer division loses decimals).
+
+**Boundary values test:** avg=75 → Distinction (uses \`>=\`) | avg=60 → First Class. Always use \`>=\` not \`>\`.`,
       blocks: [
         {
           type: "text",
@@ -477,14 +771,14 @@ int main() {
           title: "Flowchart - Grade Classification",
           content: `graph TD
 S([Start]) --> I[/Read m1,m2,m3,m4,m5/]
-I --> A[avg=(m1+m2+m3+m4+m5)/5]
-A --> D1{avg >= 75?}
+I --> A["avg=(m1+m2+m3+m4+m5)/5.0"]
+A --> D1{"avg >= 75?"}
 D1 -->|Yes| G1[/Print Distinction/]
-D1 -->|No| D2{avg >= 60?}
+D1 -->|No| D2{"avg >= 60?"}
 D2 -->|Yes| G2[/Print First Class/]
-D2 -->|No| D3{avg >= 50?}
+D2 -->|No| D3{"avg >= 50?"}
 D3 -->|Yes| G3[/Print Second Class/]
-D3 -->|No| D4{avg >= 40?}
+D3 -->|No| D4{"avg >= 40?"}
 D4 -->|Yes| G4[/Print Pass Class/]
 D4 -->|No| G5[/Print Fail/]
 G1 --> E([End])
@@ -500,10 +794,25 @@ G5 --> E`,
       title: "Define flowchart and explain various symbols used in a flowchart.",
       source: "Question Bank - Module 1",
       marks: 5,
-      notes: `Most important symbols: Oval, Rectangle, Parallelogram, Diamond, Arrow.
-    - Mnemonic: ORPDA = Oval-Rectangle-Parallelogram-Diamond-Arrow.
-    - Diamond must have two exits (Yes/No); this is a common marking point.
-    - Exam tip: keep arrows top-to-bottom to make flowchart clean and readable.`,
+      notes: `**Definition: Flowchart = graphical representation of an algorithm using standardised symbols connected by arrows.**
+
+**5 essential symbols — mnemonic ORPDA:**
+| Symbol | Shape | Purpose |
+|--------|-------|---------|
+| **O**val (Terminator) | Rounded rectangle | Start / End |
+| **R**ectangle (Process) | Rectangle | Calculation / action |
+| **P**arallelogram (I/O) | Slanted rectangle | Read / Print |
+| **D**iamond (Decision) | Diamond | Condition with Yes/No exits |
+| **A**rrow (Flow line) | Arrow | Direction of control |
+
+**Diamond rule (critical for marking!):** Decision box MUST have exactly **2 exits** — Yes and No. Never 1, never 3.
+
+**Drawing tips:**
+- Keep arrows flowing top-to-bottom (no crossing arrows)
+- Use Oval for BOTH Start AND End
+- Use Parallelogram for BOTH input AND output (not Rectangle)
+
+**Exam tip:** Easy 5-marker — draw all 5 symbols, name each, 1-line explanation each, then add a simple example flowchart (e.g. even/odd). Examiners reward diagrams.`,
       blocks: [
         {
           type: "text",

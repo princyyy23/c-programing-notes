@@ -3,14 +3,16 @@ import type { Question } from "@/types"
 import { Card } from "@/components/ui/card"
 import { BlockRenderer } from "@/components/blocks/BlockRenderer"
 import { NoteHint } from "@/components/blocks/NoteHint"
-import { IconChevronDown, IconChevronUp } from "@tabler/icons-react"
+import { IconChevronDown, IconChevronUp, IconCheck } from "@tabler/icons-react"
 import { cn } from "@/lib/utils"
+import { useProgress } from "@/context/ProgressContext"
 
 interface QuestionCardProps {
   question: Question
   index: number
   accentColor: string
   focused?: boolean
+  forceExpand?: boolean | null
 }
 
 const numberColorMap: Record<string, string> = {
@@ -34,9 +36,31 @@ const dividerColorMap: Record<string, string> = {
   rose: "text-rose-600/60 dark:text-rose-400/60",
 }
 
-export function QuestionCard({ question, index, accentColor, focused }: QuestionCardProps) {
+const reviewedRingMap: Record<string, string> = {
+  violet: "ring-violet-500/40",
+  cyan: "ring-cyan-500/40",
+  emerald: "ring-emerald-500/40",
+  rose: "ring-rose-500/40",
+}
+
+const reviewedBtnMap: Record<string, string> = {
+  violet: "text-violet-600 dark:text-violet-400 bg-violet-500/12 hover:bg-violet-500/20",
+  cyan: "text-cyan-600 dark:text-cyan-400 bg-cyan-500/12 hover:bg-cyan-500/20",
+  emerald: "text-emerald-600 dark:text-emerald-400 bg-emerald-500/12 hover:bg-emerald-500/20",
+  rose: "text-rose-600 dark:text-rose-400 bg-rose-500/12 hover:bg-rose-500/20",
+}
+
+export function QuestionCard({ question, index, accentColor, focused, forceExpand }: QuestionCardProps) {
   const [expanded, setExpanded] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
+  const { isReviewed, toggle } = useProgress()
+  const done = isReviewed(question.id)
+
+  // Respect forceExpand from QuestionList expand-all toggle
+  useEffect(() => {
+    if (forceExpand === true) setExpanded(true)
+    else if (forceExpand === false) setExpanded(false)
+  }, [forceExpand])
 
   useEffect(() => {
     if (focused) {
@@ -47,11 +71,17 @@ export function QuestionCard({ question, index, accentColor, focused }: Question
     }
   }, [focused])
 
+  const handleReview = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    toggle(question.id)
+  }
+
   return (
     <div ref={cardRef} data-question-id={question.id}>
       <Card className={cn(
         "group overflow-hidden transition-all duration-150",
-        expanded && "ring-1 ring-primary/20",
+        done && `ring-1 ${reviewedRingMap[accentColor] || "ring-primary/30"}`,
+        expanded && !done && "ring-1 ring-primary/20",
         focused && "ring-2 ring-primary/50"
       )}>
         {/* Clickable header */}
@@ -76,14 +106,31 @@ export function QuestionCard({ question, index, accentColor, focused }: Question
               </>
             )}
             {question.notes && (
-              <span className="ml-auto flex-shrink-0 text-[10px] font-semibold text-amber-600 dark:text-amber-400 bg-amber-100/80 dark:bg-amber-900/30 px-1.5 py-0.5 rounded-[3px]">
+              <span className="text-[10px] font-semibold text-amber-600 dark:text-amber-400 bg-amber-100/80 dark:bg-amber-900/30 px-1.5 py-0.5 rounded-[3px]">
                 💡 notes
               </span>
             )}
+            {/* Reviewed toggle */}
+            <button
+              onClick={handleReview}
+              title={done ? "Mark as unreviewed" : "Mark as reviewed"}
+              className={cn(
+                "ml-auto flex-shrink-0 flex items-center gap-1 px-1.5 py-0.5 rounded-[4px] text-[10px] font-semibold transition-colors cursor-pointer",
+                done
+                  ? reviewedBtnMap[accentColor] || "text-primary bg-primary/10 hover:bg-primary/20"
+                  : "text-muted-foreground/40 hover:text-muted-foreground hover:bg-accent"
+              )}
+            >
+              <IconCheck size={11} stroke={2.5} />
+              {done ? "Done" : "Mark done"}
+            </button>
           </div>
 
           {/* Question title — hero */}
-          <h3 className="text-[15.5px] font-semibold text-foreground leading-snug mb-3.5 pr-2">
+          <h3 className={cn(
+            "text-[15.5px] font-semibold leading-snug mb-3.5 pr-2 transition-colors",
+            done ? "text-foreground/60" : "text-foreground"
+          )}>
             {question.title}
           </h3>
 

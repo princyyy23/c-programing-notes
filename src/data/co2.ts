@@ -243,17 +243,17 @@ int main() {
           title: "Flowchart: while vs do-while",
           content: `graph LR
     subgraph while_loop["while Loop (Entry-Controlled)"]
-        A1[Start] --> B1{Condition?}
-        B1 -->|True| C1[Execute Body]
+        A1[Start] --> B1{"Condition?"}
+        B1 -->|Yes| C1[Execute Body]
         C1 --> B1
-        B1 -->|False| D1[End]
+        B1 -->|No| D1[End]
     end
 
     subgraph dowhile_loop["do-while Loop (Exit-Controlled)"]
         A2[Start] --> C2[Execute Body]
-        C2 --> B2{Condition?}
-        B2 -->|True| C2
-        B2 -->|False| D2[End]
+        C2 --> B2{"Condition?"}
+        B2 -->|Yes| C2
+        B2 -->|No| D2[End]
     end
 
     style A1 fill:#06b6d4,stroke:#0891b2,color:#fff
@@ -945,25 +945,25 @@ do {
           title: "Flowcharts: for, while, and do-while Loops",
           content: `graph TD
     subgraph for_loop["for Loop"]
-        F1[Initialize] --> F2{Condition?}
-        F2 -->|True| F3[Execute Body]
+        F1[Initialize] --> F2{"Condition?"}
+        F2 -->|Yes| F3[Execute Body]
         F3 --> F4[Update]
         F4 --> F2
-        F2 -->|False| F5[Exit]
+        F2 -->|No| F5[Exit]
     end
 
     subgraph while_loop["while Loop"]
-        W1[Initialize] --> W2{Condition?}
-        W2 -->|True| W3[Execute Body]
+        W1[Initialize] --> W2{"Condition?"}
+        W2 -->|Yes| W3[Execute Body]
         W3 --> W2
-        W2 -->|False| W4[Exit]
+        W2 -->|No| W4[Exit]
     end
 
     subgraph dowhile_loop["do-while Loop"]
         D1[Initialize] --> D2[Execute Body]
-        D2 --> D3{Condition?}
-        D3 -->|True| D2
-        D3 -->|False| D4[Exit]
+        D2 --> D3{"Condition?"}
+        D3 -->|Yes| D2
+        D3 -->|No| D4[Exit]
     end
 
     style F1 fill:#06b6d4,stroke:#0891b2,color:#fff
@@ -995,16 +995,16 @@ do {
           type: "diagram",
           title: "Flowchart: if-else-if Ladder",
           content: `graph TD
-    A[Start] --> B{Condition 1?}
-    B -->|True| C[Execute Block 1]
-    C --> G[End]
-    B -->|False| D{Condition 2?}
-    D -->|True| E[Execute Block 2]
+    A([Start]) --> B{"Condition 1?"}
+    B -->|Yes| C[Execute Block 1]
+    C --> G([End])
+    B -->|No| D{"Condition 2?"}
+    D -->|Yes| E[Execute Block 2]
     E --> G
-    D -->|False| F{Condition 3?}
-    F -->|True| H[Execute Block 3]
+    D -->|No| F{"Condition 3?"}
+    F -->|Yes| H[Execute Block 3]
     H --> G
-    F -->|False| I[Execute Default / else Block]
+    F -->|No| I["Execute Default / else Block"]
     I --> G
 
     style A fill:#06b6d4,stroke:#0891b2,color:#fff
@@ -1187,9 +1187,9 @@ int main() {
           title: "Flowchart: Positive / Negative / Zero Check",
           content: `graph TD
     A[Start] --> B[/Input num/]
-    B --> C{num > 0?}
+    B --> C{"num > 0?"}
     C -->|Yes| D["Print: Positive"]
-    C -->|No| E{num < 0?}
+    C -->|No| E{"num < 0?"}
     E -->|Yes| F["Print: Negative"]
     E -->|No| G["Print: Zero"]
     D --> H[End]
@@ -1395,29 +1395,38 @@ if (outerCondition) {
           title: "Flowcharts of if Constructs",
           content: `graph TD
     subgraph simple_if["1. Simple if"]
-        S1[Start] --> S2{Condition?}
-        S2 -->|True| S3[Execute Block]
+        S1[Start] --> S2{"Condition?"}
+        S2 -->|Yes| S3[Execute Block]
         S3 --> S4[Continue]
-        S2 -->|False| S4
+        S2 -->|No| S4
     end
 
     subgraph if_else["2. if-else"]
-        IE1[Start] --> IE2{Condition?}
-        IE2 -->|True| IE3[If Block]
-        IE2 -->|False| IE4[Else Block]
+        IE1[Start] --> IE2{"Condition?"}
+        IE2 -->|Yes| IE3[If Block]
+        IE2 -->|No| IE4[Else Block]
         IE3 --> IE5[Continue]
         IE4 --> IE5
     end
 
     subgraph elif["3. else-if Ladder"]
-        EL1[Start] --> EL2{Cond 1?}
-        EL2 -->|True| EL3[Block 1]
-        EL2 -->|False| EL4{Cond 2?}
-        EL4 -->|True| EL5[Block 2]
-        EL4 -->|False| EL6[Else Block]
+        EL1[Start] --> EL2{"Cond 1?"}
+        EL2 -->|Yes| EL3[Block 1]
+        EL2 -->|No| EL4{"Cond 2?"}
+        EL4 -->|Yes| EL5[Block 2]
+        EL4 -->|No| EL6[Else Block]
         EL3 --> EL7[Continue]
         EL5 --> EL7
         EL6 --> EL7
+    end
+
+    subgraph nested_if["4. Nested if"]
+        N1[Start] --> N2{"Outer Cond?"}
+        N2 -->|Yes| N3{"Inner Cond?"}
+        N2 -->|No| N5[Continue]
+        N3 -->|Yes| N4[Inner Block]
+        N3 -->|No| N5
+        N4 --> N5
     end
 
     style S1 fill:#06b6d4,stroke:#0891b2,color:#fff
@@ -1435,7 +1444,12 @@ if (outerCondition) {
     style EL4 fill:#f59e0b,stroke:#d97706,color:#fff
     style EL5 fill:#10b981,stroke:#059669,color:#fff
     style EL6 fill:#8b5cf6,stroke:#7c3aed,color:#fff
-    style EL7 fill:#06b6d4,stroke:#0891b2,color:#fff`,
+    style EL7 fill:#06b6d4,stroke:#0891b2,color:#fff
+    style N1 fill:#06b6d4,stroke:#0891b2,color:#fff
+    style N2 fill:#f59e0b,stroke:#d97706,color:#fff
+    style N3 fill:#f59e0b,stroke:#d97706,color:#fff
+    style N4 fill:#10b981,stroke:#059669,color:#fff
+    style N5 fill:#06b6d4,stroke:#0891b2,color:#fff`,
         },
       ],
     },

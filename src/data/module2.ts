@@ -13,10 +13,22 @@ export const module2: CourseOutcome = {
       title: "Explain if and else-if ladder statement with syntax.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Best use-case: many mutually exclusive ranges (grades, salary slabs, menu choice).
-    - Flow rule: first true condition executes, remaining blocks are skipped.
-    - Mnemonic: TOP-DOWN CHECK (order matters in else-if ladder).
-    - Exam tip: place most specific/highest range first to avoid wrong matching.`,
+      notes: `**else-if ladder = testing multiple conditions TOP to BOTTOM — first match wins, rest are skipped**
+
+\`\`\`c
+if (marks >= 75)      printf("Distinction");
+else if (marks >= 60) printf("First Class");
+else if (marks >= 50) printf("Second Class");
+else                  printf("Fail");
+\`\`\`
+
+**Order matters critically:** Put the most restrictive (highest) condition first. If you check \`>= 60\` before \`>= 75\`, a student with 90 stops at "First Class" (wrong!).
+
+**Traffic-light analogy:** Check Red first, then Amber, then Green — never test all three simultaneously.
+
+**Common mistake:** Using \`=\` (assignment) instead of \`==\` (comparison): \`if(a = 5)\` always evaluates to true! Always use \`==\` to compare integers.
+
+**Exam tip:** Include at least 3 levels + a final else for a complete answer.`,
       blocks: [
         {
           type: "text",
@@ -30,10 +42,24 @@ export const module2: CourseOutcome = {
       title: "Explain different if constructs.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Memory set: S-I-E-N = Simple if, if-else, else-if ladder, nested if.
-    - Differentiate by number of paths: 1-path, 2-path, multi-path, multi-level.
-    - Code tip: nested if is powerful but harder to read; use braces clearly.
-    - Exam tip: give one-line example for each construct to secure marks.`,
+      notes: `**4 types — mnemonic SIEN: Simple, If-else, Else-if-ladder, Nested**
+
+| Type | Paths | Use when |
+|------|-------|---------|
+| Simple \`if\` | 1 (true only) | Action only if condition met |
+| \`if-else\` | 2 (true + false) | Binary choice (pass/fail) |
+| \`else-if\` ladder | Many (chained) | Multiple mutually exclusive ranges |
+| Nested \`if\` | Hierarchical | Compound conditions (A AND B) |
+
+**Code example for each:**
+\`\`\`c
+if(x>0) printf("Positive");                    // simple if
+if(x>0) printf("Pos"); else printf("Non-Pos"); // if-else
+if(x>75) printf("Dist"); else if(x>60)...      // else-if ladder
+if(x>0) { if(x%2==0) printf("Even+"); }       // nested if
+\`\`\`
+
+**Exam tip:** Write syntax AND a different example for each type — that guarantees full marks. Use SIEN as your writing order.`,
       blocks: [
         {
           type: "text",
@@ -47,10 +73,21 @@ export const module2: CourseOutcome = {
       title: "Explain break, continue and goto statement with example.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Mnemonic: BCG = Break-Cut, Continue-Go next, Goto-Given label jump.
-    - break terminates nearest loop/switch immediately.
-    - continue skips current iteration body remainder, then next loop cycle starts.
-    - goto is rarely preferred; use only when structured alternatives are difficult.`,
+      notes: `**Mnemonic: BCG = Break Cuts loop, Continue Goes next iteration, Goto jumps to label**
+
+| Statement | Effect | Control goes to |
+|-----------|--------|-----------------|
+| \`break\` | Exits loop/switch entirely | Statement AFTER the loop |
+| \`continue\` | Skips rest of current iteration | Loop's increment (for) / condition (while) |
+| \`goto label\` | Jumps to labelled line in same function | The label |
+
+**Analogy:**
+- \`break\` = 🚪 Emergency exit — leave the loop entirely
+- \`continue\` = ⏩ Skip button — skip this song, stay in the playlist
+
+**Nested loop trap:** Both \`break\` and \`continue\` only affect the **innermost** loop they are inside.
+
+**\`goto\` — avoid in practice:** Considered bad style; makes code hard to trace. Mention this in exam!`,
       blocks: [
         {
           type: "text",
@@ -94,10 +131,25 @@ end:
       title: "Explain various types of loops.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Memory trick: FWD = for, while, do-while.
-    - for: fixed/known iteration count; while: unknown count based on condition.
-    - do-while: executes at least one time because check is at end.
-    - Exam tip: mention entry-controlled vs exit-controlled explicitly.`,
+      notes: `**Mnemonic: FWD = for, While, Do-while**
+
+| Loop | Entry/Exit | Best for | Can run 0 times? |
+|------|-----------|---------|-----------------|
+| \`for\` | Entry-controlled | Known iteration count | Yes |
+| \`while\` | Entry-controlled | Unknown count (sentinel) | Yes |
+| \`do-while\` | **Exit-controlled** | Must run at least once (menu) | **No** |
+
+**All three are equally powerful** — any loop can be rewritten as another one.
+
+**Conversion example:** \`for(i=0; i<n; i++) {...}\` is EXACTLY equal to:
+\`\`\`c
+i = 0;
+while(i < n) { ...; i++; }
+\`\`\`
+
+**Exam keywords to include:**
+- "entry-controlled" for \`for\` and \`while\` (check condition before body)
+- "exit-controlled" for \`do-while\` (check condition after body)`,
       blocks: [
         {
           type: "text",
@@ -111,10 +163,28 @@ end:
       title: "Difference between while and do-while with example.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Golden line: while checks before, do-while checks after.
-    - So while may run zero times, do-while runs minimum once.
-    - Code-reading tip: semicolon after while(condition); in do-while is mandatory.
-    - Exam tip: write both syntax forms in parallel for clear comparison.`,
+      notes: `**Golden rule: \`while\` checks BEFORE the body. \`do-while\` checks AFTER the body.**
+
+| Feature | while | do-while |
+|---------|-------|---------|
+| Condition check | BEFORE body | AFTER body |
+| Type | Entry-controlled | Exit-controlled |
+| Minimum executions | **0** | **1** (always!) |
+| Semicolon | No \`;\` after condition | Mandatory \`;\` after \`while(cond);\` |
+
+**Real-world analogy:**
+- \`while\` = Check if shop is open BEFORE going — might not go at all
+- \`do-while\` = Go to the shop THEN check — you went at least once
+
+**Best use case for \`do-while\`:** Menu-driven programs
+\`\`\`c
+do {
+    printf("1. Play 2. Pause 3. Quit: ");
+    scanf("%d", &choice);
+} while (choice != 3);
+\`\`\`
+
+**Syntax trap:** \`do { ... } while(condition);\` — the semicolon at the end is mandatory and easy to forget!`,
       blocks: [
         {
           type: "text",
@@ -128,10 +198,22 @@ end:
       title: "Write a program to accept any character as input and print whether it is vowel or not using switch case.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Vowel mnemonic: AEIOU (check both lower and upper case).
-    - switch is ideal for exact character matching.
-    - Input tip: use scanf(" %c", &ch) with leading space to skip leftover newline.
-    - Exam tip: include default case (not vowel) for complete solution.`,
+      notes: `**AEIOU — remember both lowercase AND uppercase! (10 vowel cases total)**
+
+**Fall-through superpower:** Multiple cases sharing no \`break\` between them route to one action:
+\`\`\`c
+case 'a': case 'e': case 'i': case 'o': case 'u':
+case 'A': case 'E': case 'I': case 'O': case 'U':
+    printf("Vowel"); break;
+default:
+    printf("Not a vowel");
+\`\`\`
+
+**Input trick:** \`scanf(" %c", &ch)\` — the space before \`%c\` skips any leftover newline from previous input. Without the space, entering a number then a character can cause the read to be skipped!
+
+**Why switch beats if-else here:** 10 exact value checks — switch with fall-through is far cleaner than \`if(ch=='a' || ch=='A' || ...)\` chains.
+
+**Full marks checklist:** All 10 vowel cases + \`break\` after vowel block + \`default\` case.`,
       blocks: [
         {
           type: "code",
@@ -162,10 +244,22 @@ int main() {
       title: "Write a program to accept any number between 1 to 7 and display day of the week using switch case.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Perfect switch problem: fixed numeric choices 1 to 7.
-    - Each case must end with break to avoid fall-through.
-    - default handles invalid day numbers safely.
-    - Exam tip: write mapping Sunday=1 ... Saturday=7 clearly.`,
+      notes: `**Classic switch example — 7 fixed integer options, one action each**
+
+**Full marks checklist:**
+- All 7 cases written (1=Sunday through 7=Saturday)
+- Every case ends with \`break\` (prevents fall-through!)
+- \`default\` handles invalid input (e.g. 0 or 8)
+
+**Without \`break\`:** case 1 falls through to case 2, printing "SundayMonday" — classic bug! Always include \`break\`.
+
+**Elegant array alternative (bonus mark):**
+\`\`\`c
+char *days[] = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
+printf("%s", days[day-1]);  // day-1 converts 1-indexed to 0-indexed
+\`\`\`
+
+**Exam tip:** Mention what happens WITHOUT \`break\` — showing you understand fall-through behaviour earns extra marks.`,
       blocks: [
         {
           type: "code",
@@ -198,10 +292,29 @@ int main() {
       title: "WAP to print the following pattern.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Pattern mantra: Outer loop = rows, Inner loop = columns/items.
-    - Number pattern uses current row value; star pattern uses constant symbol.
-    - For mirrored/centered patterns, control spaces in a separate inner loop.
-    - Exam tip: trace row i=1 and i=n once before coding full pattern.`,
+      notes: `**Pattern mantra: Outer loop = rows, Inner loop = columns**
+
+**Key insight per pattern type:**
+| Pattern | Outer loop | Inner loop prints |
+|---------|-----------|------------------|
+| Number triangle | i = 1 to n | \`i\` (current row number) |
+| Sequential digits | i = 1 to n | j = 1 to i (j itself) |
+| Star triangle | i = 1 to n | \`*\` repeated i times |
+| Decreasing stars | i = n down to 1 | \`*\` repeated i times |
+
+**Universal template (works for ALL patterns):**
+\`\`\`c
+for(i = 1; i <= n; i++) {       // rows
+    for(j = 1; j <= i; j++) {   // columns
+        printf("...");
+    }
+    printf("\n");                // MUST move to next row!
+}
+\`\`\`
+
+**Most common mistake:** Forgetting \`printf("\\n")\` after inner loop — all output lands on one line!
+
+**Exam approach:** Trace row i=1 and row i=n manually before coding — catches off-by-one errors every time.`,
       blocks: [
         {
           type: "text",
@@ -249,10 +362,24 @@ int main() {
       title: "WAP to generate Fibonacci series.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Key state variables: a (current), b (next), c (sum).
-    - Update order matters: c=a+b, then a=b, then b=c.
-    - Mnemonic: PSM = Print, Sum, Move.
-    - Exam tip: mention starting terms 0 and 1 explicitly.`,
+      notes: `**Fibonacci: each term = sum of the two before it**
+**Series: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34...**
+
+**Three-variable rolling method — mnemonic PSM = Print, Sum, Move:**
+\`\`\`c
+a = 0; b = 1;
+for(i = 1; i <= n; i++) {
+    printf("%d ", a);  // PRINT current term
+    c = a + b;         // SUM to get next
+    a = b; b = c;      // MOVE forward
+}
+\`\`\`
+
+**Update order is critical:** Compute \`c = a+b\` FIRST, THEN assign \`a=b, b=c\`. Swapping order gives wrong values!
+
+**Starting values:** Always initialise \`a=0, b=1\` (not 1,1 — the series starts at 0).
+
+**First 5 terms trace:** a goes: 0 → 1 → 1 → 2 → 3 → prints: 0 1 1 2 3 ✓`,
       blocks: [
         {
           type: "code",
@@ -282,10 +409,26 @@ int main() {
       title: "WAP to print prime numbers between 1 to 100.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Prime test shortcut: check divisors only up to sqrt(n).
-    - If any divisor found -> not prime; else prime.
-    - Handle n<=1 separately (not prime).
-    - Exam tip: outer loop for candidate number, inner loop for factor testing.`,
+      notes: `**Prime = divisible ONLY by 1 and itself. Efficient test: check divisors only up to √n**
+
+\`\`\`c
+for(i = 2; i <= 100; i++) {
+    isPrime = 1;
+    for(j = 2; j*j <= i; j++) {   // √n bound: j*j <= i
+        if(i % j == 0) { isPrime = 0; break; }
+    }
+    if(isPrime) printf("%d ", i);
+}
+\`\`\`
+
+**Why \`j*j <= i\` is enough?** Every factor pair (a, b) satisfies a×b = n. One must be ≤ √n — checking up to √n finds all factors.
+
+**Edge cases to know:**
+- 0 and 1 → NOT prime
+- 2 → Prime (the ONLY even prime!)
+- All even numbers > 2 → NOT prime
+
+**Optimisation (bonus):** After checking 2 separately, increment \`j += 2\` to skip evens — halves the inner-loop work.`,
       blocks: [
         {
           type: "code",
@@ -317,10 +460,22 @@ int main() {
       title: "Difference between switch case and if else ladder.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Switch vs if-else shortcut: Equality vs Expression.
-    - switch: cleaner for menu-like exact values.
-    - if-else: needed for ranges, compound conditions, relational checks.
-    - Exam tip: include one practical scenario for each (menu vs grading).`,
+      notes: `**Switch vs if-else shortcut: Equality Checks vs Any Expression**
+
+| Feature | switch | if-else ladder |
+|---------|--------|----------------|
+| Tests | Equality only (\`==\`) | Any expression/range/logical |
+| Data types | \`int\`, \`char\`, \`enum\` | ANY type including \`float\` |
+| Range checks | ✗ Cannot | ✓ Can test any range |
+| Fall-through | ✓ (without \`break\`) | ✗ None |
+| Readability | Better for menus (5+ choices) | Better for complex ranges |
+
+**When to use switch:** Day names, month names, menu choices, letter grades.
+**When to use if-else:** Score ranges (\`>= 60\`), float comparisons, compound \`&&\`/\`||\` conditions.
+
+**switch cannot do:** compare strings, test \`x > 5\` ranges, use \`float\`/\`double\` in the expression.
+
+**Exam tip:** Include one concrete scenario for each — "switch for weekday (fixed integer)" vs "if-else for grading (ranges)".`,
       blocks: [
         {
           type: "text",
@@ -334,10 +489,27 @@ int main() {
       title: "Difference between break and continue.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Mnemonic: break = stop loop, continue = skip step.
-    - break exits loop entirely; continue only skips current iteration remainder.
-    - In nested loops, break affects only nearest loop unless additional logic added.
-    - Exam tip: give tiny for-loop example with both statements.`,
+      notes: `**Mnemonic: Break = STOP the loop, Continue = SKIP this step**
+
+| Statement | Effect | Where control goes |
+|-----------|--------|--------------------|
+| \`break\` | Exits the loop/switch entirely | Statement AFTER the loop |
+| \`continue\` | Skips rest of current iteration | Loop's increment (for) / condition (while) |
+
+**Analogy:**
+- \`break\` = 🚪 Exit door — leave the building (loop) entirely
+- \`continue\` = ⏩ Skip track — skip this song, stay in the playlist
+
+**Traced example:**
+\`\`\`c
+for(i=1; i<=5; i++) {
+    if(i==3) continue;  // skips printing 3
+    if(i==5) break;     // stops at 5; 5 is never printed
+    printf("%d ", i);   // output: 1 2 4
+}
+\`\`\`
+
+**Nested loop trap:** Both statements only affect the **innermost** loop they are inside — not outer loops.`,
       blocks: [
         {
           type: "text",
@@ -351,10 +523,30 @@ int main() {
       title: "WAP to check entered number is palindrome or not.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Palindrome logic: original == reversed value.
-    - Reverse build formula: rev = rev*10 + lastDigit.
-    - lastDigit = n%10, shrink n by n/=10.
-    - Exam tip: store original in separate variable before modifying n.`,
+      notes: `**Palindrome = reads same forwards and backwards: 121, 1331, 12321**
+
+**Algorithm: Save original → Reverse digits → Compare**
+
+**Mnemonic: EBR = Extract (%10), Build (rev*10+digit), Remove (/10)**
+\`\`\`c
+original = n;
+while(n != 0) {
+    digit = n % 10;           // extract last digit
+    rev   = rev * 10 + digit; // build reversed number
+    n    /= 10;               // remove last digit
+}
+if(original == rev) printf("Palindrome");
+\`\`\`
+
+**Trace for n = 121:**
+| n | digit | rev |
+|---|-------|-----|
+| 121 | 1 | 1 |
+| 12 | 2 | 12 |
+| 1 | 1 | 121 |
+| original(121) == rev(121) → ✓ Palindrome! |
+
+**Critical:** Must save original BEFORE the loop — the loop destroys \`n\` by dividing it down to 0.`,
       blocks: [
         {
           type: "code",
@@ -389,10 +581,23 @@ int main() {
       title: "WAP to print even numbers between 1 to n.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Fast method: loop i=2 to n with step i+=2.
-    - Alternate method: check if(i%2==0) inside full loop (slower but simple).
-    - Boundary tip: if n<2, no even numbers to print.
-    - Exam tip: mention time benefit of step-2 approach.`,
+      notes: `**Fast method: start at 2, increment by 2 — skip all odd numbers entirely**
+\`\`\`c
+for(i = 2; i <= n; i += 2)
+    printf("%d ", i);
+\`\`\`
+
+**Why \`i += 2\` beats checking \`i % 2 == 0\`:** The step-2 approach visits only half the numbers — twice as efficient.
+
+**Count of even numbers from 1 to n:** \`n / 2\` (integer division). For n=10: 5 evens. For n=7: 3 evens.
+
+**Alternative (shows different approach):**
+\`\`\`c
+for(i = 1; i <= n; i++)
+    if(i % 2 == 0) printf("%d ", i);
+\`\`\`
+
+**Boundary check:** For n=1, the condition \`2 <= 1\` is false immediately — nothing prints. Correct behaviour!`,
       blocks: [
         {
           type: "code",
@@ -418,10 +623,31 @@ int main() {
       title: "WAP to find sum of digits using do-while loop.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Digit extraction trio: rem=n%10, sum+=rem, n/=10.
-    - do-while ensures execution at least once (works for n=0 case too).
-    - Mnemonic: EAS = Extract, Add, Shrink.
-    - Exam tip: use absolute value for negative input if required by question.`,
+      notes: `**Digit extraction trio — mnemonic EAS = Extract, Add, Shrink**
+1. \`digit = n % 10\` → extract last digit
+2. \`sum += digit\` → add to running total
+3. \`n /= 10\` → remove last digit (shrink n)
+
+\`\`\`c
+sum = 0;
+do {
+    digit = n % 10;
+    sum  += digit;
+    n    /= 10;
+} while(n != 0);
+\`\`\`
+
+**Why \`do-while\`?** Body must run at least once — even for n=0, one extraction is needed (sum = 0 correctly).
+
+**Trace for n = 1234:**
+| n | digit | sum |
+|---|-------|-----|
+| 1234 | 4 | 4 |
+| 123 | 3 | 7 |
+| 12 | 2 | 9 |
+| 1 | 1 | 10 |
+
+**Initialise \`sum = 0\`!** Forgotten initialisation is the #1 bug here — uninitialized sum holds garbage.`,
       blocks: [
         {
           type: "code",
@@ -451,10 +677,25 @@ int main() {
       title: "Write output of the given code with pre/post increment operators.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Important concept: post-increment uses old value then increments; pre-increment increments first.
-    - For safe coding, avoid multiple side effects on same variable in one expression.
-    - Best explanation style: evaluate line-by-line and track x,y,res table.
-    - Exam tip: write both caution and computed output to show depth.`,
+      notes: `**Golden rule: \`++i\` increments FIRST then uses. \`i++\` uses current value THEN increments.**
+
+| Expression | Order | Example (i=5) |
+|-----------|-------|---------------|
+| \`++i\` | Increment → Use | \`printf("%d", ++i)\` prints **6**, i is now 6 |
+| \`i++\` | Use → Increment | \`printf("%d", i++)\` prints **5**, i becomes 6 |
+
+**Trace the given code with a variable table:**
+\`\`\`c
+int x=0, y=20, res;
+res = y++ + x++;     // uses old values: 20+0=20, THEN y=21, x=1
+res += ++y + ++x;    // pre-increments first: y=22, x=2, then 22+2=24 added
+// res = 20 + 24 = 44,  x=2,  y=22
+\`\`\`
+**Output: x=2 y=22 result=44**
+
+**Exam advice:** For "what is the output?" questions — go line by line, maintain a variable table at each step. Never guess!
+
+**Caution:** Multiple side-effects on the same variable in one expression have undefined behaviour in C — avoid in real code.`,
       blocks: [
         {
           type: "text",
@@ -468,10 +709,22 @@ int main() {
       title: "Implement a C program to read a character and print whether it is vowel or not using switch case.",
       source: "Question Bank - Module 2",
       marks: 5,
-      notes: `Same vowel-switch logic but print character-specific output.
-    - Keep grouped cases for vowels to avoid repeated code.
-    - Input handling with leading-space scanf format avoids newline issue.
-    - Exam tip: mention that switch improves readability over long if-else chain here.`,
+      notes: `**Same vowel-switch logic as q6 — but output includes the character itself (\`%c\` format)**
+
+**Grouped cases with fall-through (10 cases, 1 action):**
+\`\`\`c
+case 'a': case 'e': case 'i': case 'o': case 'u':
+case 'A': case 'E': case 'I': case 'O': case 'U':
+    printf("%c is a vowel\n", ch); break;
+default:
+    printf("%c is not a vowel\n", ch);
+\`\`\`
+
+**Switch advantage here:** 10 exact char comparisons — switch is cleaner than a long \`if(ch=='a' || ch=='A' || ...)\` chain.
+
+**scanf tip:** \`scanf(" %c", &ch)\` — the leading space absorbs leftover newline from previous \`scanf("%d")\`. Without it, the newline gets read as the character!
+
+**Exam checklist:** All 10 vowel cases + \`break\` after vowel block + \`default\` case.`,
       blocks: [
         {
           type: "code",
