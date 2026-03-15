@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/* Class-based dark mode — toggled by adding .dark to <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ── Windows 11 Light Theme ── */
+  --color-background: #f3f3f3;
+  --color-foreground: #1a1a1a;
+  --color-card: #ffffff;
+  --color-card-foreground: #1a1a1a;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #1a1a1a;
+  --color-primary: #005fb8;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f9f9f9;
+  --color-secondary-foreground: #1a1a1a;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #5d5d5d;
+  --color-accent: #f0f0f0;
+  --color-accent-foreground: #1a1a1a;
+  --color-destructive: #c42b1c;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #d0d0d0;
+  --color-input: #d0d0d0;
+  --color-ring: #005fb8;
+
+  /* Sidebar / NavigationView */
+  --color-sidebar: #f3f3f3;
+  --color-sidebar-foreground: #1a1a1a;
+  --color-sidebar-accent: #e0e0e0;
+  --color-sidebar-accent-foreground: #1a1a1a;
+  --color-sidebar-border: #d0d0d0;
+
+  /* WinUI 3 standard radii */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* Segoe UI Variable — the Windows 11 system font */
+  --font-sans: "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "Cascadia Code", "Cascadia Mono", "Consolas", ui-monospace, monospace;
+}
+
+/* ── Dark theme (Windows 11 Dark) ── */
+.dark {
+  color-scheme: dark;
+  --color-background: #202020;
+  --color-foreground: #f5f5f5;
+  --color-card: #2d2d2d;
+  --color-card-foreground: #f5f5f5;
+  --color-popover: #2d2d2d;
+  --color-popover-foreground: #f5f5f5;
+  --color-primary: #60cdff;
+  --color-primary-foreground: #003d6e;
+  --color-secondary: #323232;
+  --color-secondary-foreground: #f5f5f5;
+  --color-muted: #2d2d2d;
+  --color-muted-foreground: #9d9d9d;
+  --color-accent: #383838;
+  --color-accent-foreground: #f5f5f5;
+  --color-destructive: #ff99a4;
+  --color-destructive-foreground: #1a1a1a;
+  --color-border: #3d3d3d;
+  --color-input: #3d3d3d;
+  --color-ring: #60cdff;
+
+  --color-sidebar: #1c1c1c;
+  --color-sidebar-foreground: #f5f5f5;
+  --color-sidebar-accent: #383838;
+  --color-sidebar-accent-foreground: #f5f5f5;
+  --color-sidebar-border: #333333;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    margin: 0;
+    font-feature-settings: "kern", "liga", "calt";
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-primary) 30%, transparent);
+    color: var(--color-foreground);
+  }
+
+  /* Windows 11 thin overlay scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-foreground) 18%, transparent);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--color-foreground) 30%, transparent);
+  }
+}
