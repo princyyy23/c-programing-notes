@@ -32,14 +32,14 @@ export function Layout({
   const { isDark, toggle } = useTheme()
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex h-[100dvh] w-full overflow-hidden bg-background">
       <Sidebar courseOutcomes={courseOutcomes} activeCO={activeCO} onSelectCO={onSelectCO} />
 
       {/* Main content column */}
-      <div className="flex-1 min-w-0 flex flex-col bg-card/60 lg:bg-card/50 pt-12 lg:pt-0">
+      <div className="flex-1 min-w-0 flex flex-col bg-card/60 lg:bg-card/50 pt-[52px] lg:pt-0 relative">
 
         {/* ── Top bar — WinUI 3 command bar ── */}
-        <div className="flex-shrink-0 h-12 border-b border-border bg-card/80 flex items-center gap-3 px-4 sticky top-12 lg:top-0 z-30 backdrop-blur-sm">
+        <div className="flex-shrink-0 h-12 border-b border-border bg-card/80 flex items-center gap-3 px-4 z-30 backdrop-blur-sm lg:relative fixed top-[52px] lg:top-0 left-0 right-0 lg:w-auto w-full">
           <SearchBar
             courseOutcomes={courseOutcomes}
             onNavigate={onNavigate}
@@ -59,16 +59,16 @@ export function Layout({
         </div>
 
         {/* ── Content ── */}
-        {searchQuery ? (
-          <SearchResultsPage
-            query={searchQuery}
-            courseOutcomes={courseOutcomes}
-            onNavigate={onNavigate}
-            onBack={onCloseSearch}
-          />
-        ) : (
-          <ScrollArea className="flex-1 h-[calc(100vh-3rem)]">
-            <div className="max-w-4xl mx-auto px-5 md:px-10 py-8 pt-6 pb-16">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden">
+          {searchQuery ? (
+            <SearchResultsPage
+              query={searchQuery}
+              courseOutcomes={courseOutcomes}
+              onNavigate={onNavigate}
+              onBack={onCloseSearch}
+            />
+          ) : (
+            <div className="max-w-4xl mx-auto px-3 sm:px-5 md:px-10 py-8 pt-6 pb-24">
               {currentCO ? (
                 <QuestionList
                   co={currentCO}
@@ -80,8 +80,8 @@ export function Layout({
                 </div>
               )}
             </div>
-          </ScrollArea>
-        )}
+          )}
+        </div>
       </div>
     </div>
   )

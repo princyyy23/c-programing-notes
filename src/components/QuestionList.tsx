@@ -76,59 +76,88 @@ export function QuestionList({ co, focusedQuestionId }: QuestionListProps) {
 
   return (
     <div>
-      {/* ── Chapter header ── */}
-      <div className={cn(
-        "mb-8 pl-4 border-l-[3px]",
-        accentBorderMap[co.color] || "border-primary"
-      )}>
-        <span className={cn(
-          "text-[10px] font-bold uppercase tracking-widest mb-1 block",
-          accentTextMap[co.color] || "text-primary"
-        )}>
-          {co.id.toUpperCase()}
-        </span>
-        <h1 className="text-[22px] font-bold text-foreground leading-tight">
-          {co.title}
-        </h1>
-        <p className="text-[13px] text-muted-foreground mt-1 leading-relaxed">
-          {co.description}
-        </p>
+      {/* ── Awesome Hero Header ── */}
+      <div className="relative mb-10 overflow-hidden rounded-[20px] border border-border/50 bg-card/30 p-6 sm:p-8 md:p-10 shadow-sm backdrop-blur-sm">
+        {/* Glowing background meshes */}
+        <div className={cn(
+          "absolute -top-24 -right-24 w-64 h-64 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 dark:opacity-20 pointer-events-none",
+          progressBarMap[co.color] || "bg-primary"
+        )} />
+        <div className={cn(
+          "absolute -bottom-24 -left-24 w-80 h-80 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 dark:opacity-10 pointer-events-none",
+          progressBarMap[co.color] || "bg-primary"
+        )} />
 
-        {/* Stats row */}
-        <div className="flex items-center gap-2 mt-3 flex-wrap">
-          <span className={cn(
-            "text-[11px] font-semibold px-2 py-0.5 rounded-[4px]",
-            accentBgMap[co.color] || "bg-primary/10",
-            accentTextMap[co.color] || "text-primary"
-          )}>
-            {total} questions
-          </span>
-          {notesCount > 0 && (
-            <span className="text-[11px] font-medium text-amber-600 dark:text-amber-400 bg-amber-100/80 dark:bg-amber-900/30 px-2 py-0.5 rounded-[4px]">
-              💡 {notesCount} with quick notes
-            </span>
-          )}
-          {done > 0 && (
-            <span className={cn(
-              "text-[11px] font-semibold px-2 py-0.5 rounded-[4px]",
-              accentTextMap[co.color] || "text-primary",
-              accentBgMap[co.color] || "bg-primary/10"
-            )}>
-              ✓ {done}/{total} reviewed
-            </span>
+        <div className="relative z-10 flex flex-col md:flex-row gap-8 md:items-start justify-between">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-3">
+              <span className={cn(
+                "text-[11px] font-bold tracking-[0.2em] uppercase",
+                accentTextMap[co.color] || "text-primary"
+              )}>
+                MODULE {co.id.replace(/[^0-9]/g, '') || co.id.slice(-1).toUpperCase()}
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-border" />
+              <span className="text-[11px] font-medium text-muted-foreground uppercase tracking-widest">
+                Question Bank
+              </span>
+            </div>
+
+            <h1 className="text-[28px] sm:text-[34px] font-extrabold tracking-tight text-foreground mb-4 leading-[1.15]">
+              {co.title}
+            </h1>
+
+            <p className="text-[14px] sm:text-[15px] text-muted-foreground max-w-2xl leading-relaxed">
+              {co.description}
+            </p>
+
+            <div className="flex items-center gap-3 mt-6 flex-wrap">
+              <div className="flex items-center gap-1.5 bg-background/60 backdrop-blur-md border border-border/50 px-3.5 py-1.5 rounded-full text-[12px] font-medium text-foreground shadow-sm">
+                <span className={cn("w-2 h-2 rounded-full", progressBarMap[co.color] || "bg-primary")} />
+                {total} Questions
+              </div>
+
+              {notesCount > 0 && (
+                <div className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/20 px-3.5 py-1.5 rounded-full text-[12px] font-medium text-amber-600 dark:text-amber-400 shadow-sm">
+                  💡 {notesCount} Quick Notes
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right side - Progress Ring */}
+          {total > 0 && (
+            <div className="flex-shrink-0 flex items-center bg-background/50 backdrop-blur-md border border-border/50 rounded-[18px] p-5 shadow-sm">
+              <div className="relative w-[72px] h-[72px] flex items-center justify-center">
+                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" className="stroke-muted/40" strokeWidth="8" fill="none" />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="40"
+                    className={cn(
+                      "transition-all duration-1000 ease-out",
+                      accentTextMap[co.color]?.replace('text-', 'stroke-').replace('dark:text-', 'dark:stroke-') || "stroke-primary"
+                    )}
+                    strokeWidth="8"
+                    fill="none"
+                    strokeDasharray="251.2"
+                    strokeDashoffset={251.2 - (251.2 * pct) / 100}
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-[16px] font-bold text-foreground leading-none">{pct}%</span>
+                </div>
+              </div>
+              <div className="ml-5 flex flex-col pr-2">
+                <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground mb-1">Progress</span>
+                <span className="text-[15px] font-bold text-foreground leading-none mb-0.5">{done} <span className="text-muted-foreground font-medium text-[13px]">/ {total}</span></span>
+                <span className="text-[11px] text-muted-foreground font-medium">Reviewed</span>
+              </div>
+            </div>
           )}
         </div>
-
-        {/* Progress bar */}
-        <div className="mt-3 h-1.5 rounded-full bg-border overflow-hidden w-full max-w-xs">
-          <div
-            className={cn("h-full rounded-full transition-all duration-500", progressBarMap[co.color] || "bg-primary")}
-            style={{ width: `${pct}%` }}
-          />
-        </div>
-        {done > 0 && (
-          <p className="text-[11px] text-muted-foreground mt-1">{pct}% complete</p>
-        )}
       </div>
 
       {/* ── Toolbar ── */}

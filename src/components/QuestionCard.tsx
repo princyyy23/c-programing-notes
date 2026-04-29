@@ -86,7 +86,7 @@ export function QuestionCard({ question, index, accentColor, focused, forceExpan
       )}>
         {/* Clickable header */}
         <div
-          className="px-5 pt-4 pb-4 cursor-pointer select-none"
+          className="px-3 sm:px-5 pt-4 pb-4 cursor-pointer select-none"
           onMouseDown={e => e.preventDefault()}
           onClick={() => setExpanded(!expanded)}
         >
@@ -152,7 +152,7 @@ export function QuestionCard({ question, index, accentColor, focused, forceExpan
 
         {/* Answer section */}
         {expanded && (
-          <div className="border-t border-border px-5 pt-0 pb-5">
+          <div className="border-t border-border px-3 sm:px-5 pt-0 pb-5">
             {/* "Answer" divider */}
             <div className="flex items-center gap-2.5 py-3">
               <span className={cn(
