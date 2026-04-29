@@ -3,7 +3,6 @@ import { Sidebar } from "./Sidebar"
 import { QuestionList } from "@/components/QuestionList"
 import { SearchBar } from "@/components/SearchBar"
 import { SearchResultsPage } from "@/components/SearchResultsPage"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { useTheme } from "@/context/ThemeContext"
 import { IconMoon, IconSunHigh } from "@tabler/icons-react"
 

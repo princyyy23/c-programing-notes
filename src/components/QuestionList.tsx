@@ -24,12 +24,12 @@ interface QuestionListProps {
   focusedQuestionId?: string | null
 }
 
-const accentBorderMap: Record<string, string> = {
-  violet: "border-violet-500",
-  cyan: "border-cyan-500",
-  emerald: "border-emerald-500",
-  rose: "border-rose-500",
-}
+// const accentBorderMap: Record<string, string> = {
+//   violet: "border-violet-500",
+//   cyan: "border-cyan-500",
+//   emerald: "border-emerald-500",
+//   rose: "border-rose-500",
+// }
 
 const accentTextMap: Record<string, string> = {
   violet: "text-violet-600 dark:text-violet-400",
@@ -38,12 +38,12 @@ const accentTextMap: Record<string, string> = {
   rose: "text-rose-600 dark:text-rose-400",
 }
 
-const accentBgMap: Record<string, string> = {
-  violet: "bg-violet-500/10 dark:bg-violet-500/15",
-  cyan: "bg-cyan-500/10 dark:bg-cyan-500/15",
-  emerald: "bg-emerald-500/10 dark:bg-emerald-500/15",
-  rose: "bg-rose-500/10 dark:bg-rose-500/15",
-}
+// const accentBgMap: Record<string, string> = {
+//   violet: "bg-violet-500/10 dark:bg-violet-500/15",
+//   cyan: "bg-cyan-500/10 dark:bg-cyan-500/15",
+//   emerald: "bg-emerald-500/10 dark:bg-emerald-500/15",
+//   rose: "bg-rose-500/10 dark:bg-rose-500/15",
+// }
 
 const progressBarMap: Record<string, string> = {
   violet: "bg-violet-500",
